@@ -143,3 +143,5 @@ Request permission before modifying:
 ---
 
 **Questions?** Open an issue or see [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+<!-- Last updated: 2026-01-27 -->
