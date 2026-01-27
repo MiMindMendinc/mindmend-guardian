@@ -24,6 +24,22 @@ Offline-first, private, compassionate. Built to listen when needed and protect a
 
 Protecting the future, one voice at a time.
 
+## For New Contributors
+
+Welcome! We're excited to have you contribute to MindMend Guardian.
+
+**Start here:**
+- 📖 **[Contributing Guidelines](CONTRIBUTING.md)** — Setup, workflow, and PR checklist
+- 🛠️ **[Developer Guidelines](.github/copilot-instructions.md)** — Architecture, coding standards, and testing
+
+**Key principles:**
+- 100% offline, privacy-first design
+- No cloud dependencies or telemetry
+- Compassionate, child-safety focused
+- Low-power optimization for Raspberry Pi
+
+See the `good first issue` labeled issues to get started!
+
 ## Need Help Building This ❤️
 
 Solo dev in Michigan — need 1–3 volunteers for docs, Raspberry Pi testing, and small code fixes. See the `good first issue` labeled issues and CONTRIBUTING.md for how to help.

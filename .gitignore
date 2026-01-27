@@ -205,3 +205,19 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Machine Learning / Model files
+*.pth
+*.bin
+*.ckpt
+/models/*
+!/models/.gitkeep
+/weights/*
+/data/*
+
+# macOS
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
