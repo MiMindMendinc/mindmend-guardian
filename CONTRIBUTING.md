@@ -1,36 +1,32 @@
 # Contributing to MindMend Guardian
 
-Thank you for considering contributing! This is an early-stage project built by a solo Michigan dad focused on offline, privacy-first child safety AI. I'm stretched thin with family, farm, and nonprofit work, so any help — big or small — is incredibly valuable.
+Thanks for looking — I'm a solo Michigan dad building MindMend Guardian, a privacy-first, offline child-safety AI. Family, farm, and nonprofit life mean I'm short on time, so any help is deeply appreciated.
 
-## What We Need Help With
-- Small fixes, bug reports, or tests
-- Documentation (installation guides, README expansions)
-- Voice phrases, alert ideas, or testing on real hardware
-- Setup instructions for Raspberry Pi or other low-power devices
+How you can help
+- Small docs fixes (README, install steps)
+- Tests or CI improvements
+- Raspberry Pi / low-power install recipes
+- Voice phrases, sample alerts, and UX wording
+- Code review, debugging, or feature PRs
 
-## How to Contribute
-1. Fork the repository
-2. Create a new branch:
-   - `git checkout -b fix-bug-or-docs`
-3. Make your changes
-4. Commit with clear messages:
-   - `git commit -m "Describe what you changed"`
-5. Push your branch and open a Pull Request to the `main` branch
-6. In the PR description, include:
-   - What you changed
-   - Why you changed it
-   - Any testing notes or hardware used
+Getting started
+1. Fork the repo  
+2. Create a feature branch: `git checkout -b your-name/short-description`  
+3. Make changes and add tests where applicable  
+4. Commit with clear messages: `git commit -m "Short: what changed"`  
+5. Push: `git push origin your-name/short-description`  
+6. Open a Pull Request against `main`
 
-PRs are reviewed on weekends when possible. Questions? Open an issue or reply on X (@p_perrien).
+Communication
+- Open issues for questions or small tasks
+- Tag me on X: @p_perrien if you want a quick ping
 
-## Code style & tests
-- Keep changes small and focused.
-- Add short tests or usage examples where helpful.
-- Document any new dependencies or hardware instructions.
+Perks & thanks
+- First contributors (meaningful PRs merged) get a named farm animal (cow, goat, or chicken) and a shoutout in the README. 🐄🐐🐔
+- Contributors who help significantly will be added to the project acknowledgements.
 
-## Good Starting Points
-Look for issues labeled `good first issue` or `help wanted` (coming soon).
+Code of conduct & safety
+- This project is about protecting kids; please be respectful and collaborative.
+- If you'd like a formal Code of Conduct added, open an issue and I'll add one quickly.
 
-First contributors get shoutouts here + a farm animal named after them (cow, goat, chicken — your choice!) 🐄🐐🐔
-
-Let's protect kids together — ethically and offline. 🛡️❤️
+Thank you — your time matters here. If you're happy with this, please merge and let's start onboarding helpers.
