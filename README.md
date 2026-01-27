@@ -24,6 +24,19 @@ Offline-first, private, compassionate. Built to listen when needed and protect a
 
 Protecting the future, one voice at a time.
 
+## Contributing
+
+We welcome contributions! Whether you're fixing docs, adding tests, improving Raspberry Pi support, or enhancing features, your help is appreciated.
+
+**Quick start:**
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature`
+3. Set up your environment (if dependencies exist): `python -m venv venv && source venv/bin/activate`
+4. Make your changes and add tests
+5. Submit a pull request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines, setup instructions, and testing requirements.
+
 ## Need Help Building This ❤️
 
 Solo dev in Michigan — need 1–3 volunteers for docs, Raspberry Pi testing, and small code fixes. See the `good first issue` labeled issues and CONTRIBUTING.md for how to help.
