@@ -211,8 +211,8 @@ __marimo__/
 *.ckpt
 *.bin
 *.pth
-/models/*
-!/models/.gitkeep
-/weights/*
-/data/*
-/test-audio/*
+models/*
+!models/.gitkeep
+weights/*
+data/*
+test-audio/*

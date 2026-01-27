@@ -10,7 +10,7 @@ Python 3, whisper.cpp (submodule), optional llama.cpp, Silero VAD/threading for 
 No cloud/telemetry/external APIs. Never commit .env, model weights (*.ckpt/*.bin/*.pth), personal audio. Add tests for voice/threat/geofence. Prioritize low-power (<1W idle on RPi Zero). Ethical: minimize false positives, gentle/non-alarmist alerts.
 
 ## Setup
-Clone → venv → pip install -r requirements.txt → git submodule update --init --recursive → run tts_test.py or main listener.
+Clone → venv → install dependencies (if available) → git submodule update --init --recursive → run tts_test.py or main listener.
 
 ## Do-not-touch
 /models/* /weights/* /data/* /test-audio/* .env large binaries.

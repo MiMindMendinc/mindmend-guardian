@@ -15,7 +15,7 @@ Getting started
    ```bash
    python -m venv venv
    source venv/bin/activate
-   pip install -r requirements.txt
+   # Install dependencies when available (e.g., pip install -r requirements.txt)
    git submodule update --init --recursive
    ```
 3. Create a feature branch: `git checkout -b feature/short-description`  
@@ -40,6 +40,6 @@ Perks & thanks
 
 Code of conduct & safety
 - This project is about protecting kids; please be respectful and collaborative.
-- We follow the Contributor Covenant v2.1 — https://www.contributor-covenant.org/version/2/1/code_of_conduct/
+- We follow our [Code of Conduct](CODE_OF_CONDUCT.md). For reference, we align with principles similar to the Contributor Covenant v2.1 — https://www.contributor-covenant.org/version/2/1/code_of_conduct/
 
 Thank you — your time matters here.

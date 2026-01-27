@@ -31,7 +31,7 @@ We welcome contributions! Whether you're fixing docs, adding tests, improving Ra
 **Quick start:**
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Set up your environment: `python -m venv venv && source venv/bin/activate && pip install -r requirements.txt`
+3. Set up your environment (if dependencies exist): `python -m venv venv && source venv/bin/activate`
 4. Make your changes and add tests
 5. Submit a pull request
 
