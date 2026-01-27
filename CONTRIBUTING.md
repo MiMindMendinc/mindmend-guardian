@@ -29,4 +29,4 @@ Code of conduct & safety
 - This project is about protecting kids; please be respectful and collaborative.
 - If you'd like a formal Code of Conduct added, open an issue and I'll add one quickly.
 
-Thank you — your time matters here. If you're happy with this, please merge and let's start onboarding helpers.
+Thank you — your time matters here.

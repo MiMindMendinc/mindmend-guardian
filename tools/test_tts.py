@@ -14,7 +14,7 @@ try:
     for p in PHRASES:
         print(p)
         engine.say(p)
-    engine.runAndWait()
+        engine.runAndWait()
 except Exception:
     # Fallback: just print
     for p in PHRASES:
