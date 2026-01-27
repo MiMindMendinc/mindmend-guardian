@@ -24,6 +24,16 @@ Offline-first, private, compassionate. Built to listen when needed and protect a
 
 Protecting the future, one voice at a time.
 
+## Contributing
+
+We welcome contributions! This is a privacy-first, offline child-safety project that needs help with:
+- Documentation and install guides
+- Raspberry Pi / low-power testing
+- Voice phrases and UX improvements
+- Code review and bug fixes
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on setup, testing, and pull requests.
+
 ## Need Help Building This ❤️
 
 Solo dev in Michigan — need 1–3 volunteers for docs, Raspberry Pi testing, and small code fixes. See the `good first issue` labeled issues and CONTRIBUTING.md for how to help.
