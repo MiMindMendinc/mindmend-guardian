@@ -39,6 +39,6 @@ Perks & thanks
 
 Code of conduct & safety
 - This project is about protecting kids; please be respectful and collaborative.
-- We follow the [Contributor Covenant v2.1 Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/).
+- We follow our [Code of Conduct](CODE_OF_CONDUCT.md) (based on Contributor Covenant v2.1).
 
 Thank you — your time matters here.

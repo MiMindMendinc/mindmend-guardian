@@ -1,7 +1,12 @@
 # Copilot & Contributor Instructions — MindMend Guardian
 
 ## Project overview
-100% offline guardian AI for kids/teens: local wake-word listener ("hey mindmend"), gentle TTS conversation, Luna Safety Core for threat/grooming detection, geofencing, parent alerts. No cloud, no telemetry, compassionate responses (e.g., 988 resources).
+100% offline guardian AI for kids/teens:
+- Local wake-word listener ("hey mindmend")
+- Gentle TTS conversation
+- Luna Safety Core for threat/grooming detection, geofencing, parent alerts
+- No cloud, no telemetry
+- Compassionate responses (e.g., 988 resources)
 
 ## Tech stack
 Python 3, whisper.cpp (submodule), optional llama.cpp, Silero VAD/threading for low-power listening, pytest, GitHub Actions CI.
