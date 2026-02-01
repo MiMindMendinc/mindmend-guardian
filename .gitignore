@@ -216,3 +216,12 @@ __marimo__/
 /weights/*
 /data/*
 /test-audio/*
+# Model weights and binaries
+*.ckpt
+*.bin
+*.pth
+models/*
+!models/.gitkeep
+weights/*
+data/*
+test-audio/*
