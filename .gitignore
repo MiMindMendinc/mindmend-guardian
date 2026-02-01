@@ -207,6 +207,15 @@ marimo/_lsp/
 __marimo__/
 
 # MindMend Guardian specific
+# Model weights and data files
+*.ckpt
+*.bin
+*.pth
+/models/*
+!/models/.gitkeep
+/weights/*
+/data/*
+/test-audio/*
 # Model weights and binaries
 *.ckpt
 *.bin

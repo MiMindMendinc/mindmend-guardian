@@ -11,6 +11,23 @@ How you can help
 
 Getting started
 1. Fork the repo  
+2. Create a feature branch: `git checkout -b feature/short-description` (use `feature/` prefix for feature branches)
+3. Set up your development environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   git submodule update --init --recursive
+   ```
+4. Make changes and add tests where applicable  
+5. Test your changes:
+   ```bash
+   pytest -q
+   ```
+   For hardware-specific tests (e.g., Raspberry Pi), mark them with `@pytest.mark.hardware` and run them on the target device.
+6. Commit with clear messages: `git commit -m "Short: what changed"`  
+7. Push: `git push origin feature/short-description`  
+8. Open a Pull Request against `main`
 2. Clone and set up your development environment:
    ```bash
    python -m venv venv
@@ -40,6 +57,7 @@ Perks & thanks
 
 Code of conduct & safety
 - This project is about protecting kids; please be respectful and collaborative.
+- We follow our [Code of Conduct](CODE_OF_CONDUCT.md) (based on Contributor Covenant v2.1).
 - We follow our [Code of Conduct](CODE_OF_CONDUCT.md). For reference, we align with principles similar to the Contributor Covenant v2.1 — https://www.contributor-covenant.org/version/2/1/code_of_conduct/
 
 Thank you — your time matters here.
