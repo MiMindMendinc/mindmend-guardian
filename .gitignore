@@ -210,6 +210,11 @@ __marimo__/
 *.pth
 *.bin
 *.ckpt
+# MindMend Guardian specific
+# Model weights and data files
+*.ckpt
+*.bin
+*.pth
 /models/*
 !/models/.gitkeep
 /weights/*
@@ -221,3 +226,13 @@ __marimo__/
 # IDEs
 .vscode/
 .idea/
+/test-audio/*
+# Model weights and binaries
+*.ckpt
+*.bin
+*.pth
+models/*
+!models/.gitkeep
+weights/*
+data/*
+test-audio/*
