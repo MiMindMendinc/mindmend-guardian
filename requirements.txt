@@ -1,7 +1,38 @@
+# Core dependencies for MindMend Guardian
+
+# Machine Learning & Scientific Computing
 torch
-streamlit
-scipy
-scikit-learn
 numpy
 pandas
+scikit-learn
+scipy
+
+# Visualization (for Perrien Simulator)
+streamlit
 plotly
+
+# Guardian-specific dependencies
+pyaudio  # For audio input
+psutil  # For system monitoring
+
+# Optional dependencies for advanced features
+# Uncomment as needed:
+
+# For Whisper (speech recognition)
+# whisper-cpp-python
+
+# For LLM support  
+# llama-cpp-python
+
+# For TTS (text-to-speech)
+# pyttsx3
+
+# For Luna Safety Core
+# flask
+# PyJWT
+# firebase-admin
+# spacy
+# spacytextblob
+
+# For VAD (voice activity detection)
+# onnxruntime
