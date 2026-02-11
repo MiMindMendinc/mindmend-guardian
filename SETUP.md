@@ -95,9 +95,12 @@ streamlit run perrien-simulator/app.py
 
 ### Running Tests
 
-Currently, the project uses manual testing. To run the available tests:
+The project includes a basic automated test suite:
 
 ```bash
+# Run basic validation tests
+python tests/test_basic.py
+
 # Test TTS phrases
 python tools/test_tts.py
 
