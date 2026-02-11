@@ -1,5 +1,38 @@
 # MindMend Guardian
 
+> **100% offline, privacy-first AI guardian for kids, teens, and families**
+
+MindMend Guardian is a compassionate, local-first mental health companion with advanced safety features. Everything runs on your device—no cloud, no telemetry, complete privacy.
+
+## Features
+
+- 🎤 **Voice-Activated Guardian**: Local wake-word detection ("hey mindmend")
+- 🛡️ **Luna Safety Core**: Real-time threat detection, geofencing, and parent alerts
+- 📊 **Perrien Simulator**: Data analysis and visualization tool
+- 🔒 **Privacy-First**: 100% offline, no data leaves your device
+- ⚡ **Low-Power**: Optimized for Raspberry Pi (<1W idle)
+- 💚 **Compassionate**: Gentle, supportive responses for emotional well-being
+
+## Quick Start
+
+```bash
+# Clone repository
+git clone https://github.com/MiMindMendinc/mindmend-guardian.git
+cd mindmend-guardian
+
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Test installation
+python tests/test_basic.py
+```
+
+For detailed installation instructions, see **[SETUP.md](SETUP.md)**.
+
 ## Perrien Simulator
 The Perrien Simulator is a powerful tool designed to simulate various scenarios for analysis and visualization. It provides users with an intuitive interface to interact with the simulation models, enabling them to explore different outcomes based on the parameters input.
 
