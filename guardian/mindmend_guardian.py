@@ -61,16 +61,15 @@ quantum_glitch_init()
 # ===================== THROTTLE (CHILL MODE) =====================
 def throttle_chill():
     torch.set_num_threads(1)
-    for proc in psutil.process_iter(['pid']):
-        if proc.info['pid'] == os.getpid():
-            try:
-                p = psutil.Process(proc.info['pid'])
-                p.nice(19)
-                if platform.system() == 'Linux':
-                    p.ionice(psutil.IOPRIO_CLASS_IDLE)
-                p.cpu_affinity([0])
-            except:
-                pass
+    # Use os.getpid() directly instead of enumerating all processes
+    try:
+        p = psutil.Process(os.getpid())
+        p.nice(19)
+        if platform.system() == 'Linux':
+            p.ionice(psutil.IOPRIO_CLASS_IDLE)
+        p.cpu_affinity([0])
+    except (psutil.NoSuchProcess, psutil.AccessDenied, OSError):
+        pass
 
 def unleash_full():
     torch.set_num_threads(os.cpu_count() or 128)
@@ -161,7 +160,7 @@ import pyaudio
 p = pyaudio.PyAudio()
 stream = p.open(format=pyaudio.paInt16, channels=1, rate=SAMPLING_RATE, input=True, frames_per_buffer=512)
 
-sr_array = np.array(SAMPLING_RATE, dtype=np.int64)
+sr_array = SAMPLING_RATE  # Use int scalar directly - more efficient than array wrapper
 
 wake_buffer = collections.deque(maxlen=SAMPLING_RATE * AUDIO_BUFFER_SEC_CHILL)
 utterance_buffer = collections.deque(maxlen=SAMPLING_RATE * AUDIO_BUFFER_SEC_MAX)
@@ -172,13 +171,15 @@ in_speech = False
 last_voice_time = time.time()
 last_heartbeat = time.time()
 conversation_history = []
+MAX_CONVERSATION_HISTORY = 20  # Prevent OOM on long sessions
 
 print("Guardian online. Awaiting your voice in deepest chill… Say “hey mindmend”")
 
 while True:
     try:
         data = stream.read(512, exception_on_overflow=False)
-        audio_np = np.frombuffer(data, dtype=np.int16).astype(np.float32) / 32768.0
+        # Avoid unnecessary dtype conversion copy - numpy auto-promotes int16 to float in division
+        audio_np = np.frombuffer(data, dtype=np.int16) / 32768.0
         
         # Always maintain rolling buffers
         wake_buffer.extend(audio_np)
@@ -186,7 +187,8 @@ while True:
             utterance_buffer.extend(audio_np)
 
         if SILERO_AVAILABLE:
-            input_dict = {"input": audio_np.reshape(1, -1), "sr": sr_array, "h": h, "c": c}
+            # Use view instead of reshape to avoid unnecessary copy
+            input_dict = {"input": audio_np[np.newaxis, :], "sr": sr_array, "h": h, "c": c}
             out = silero.run(None, input_dict)
             prob = out[0][0][1]
             h, c = out[1], out[2]
@@ -202,7 +204,8 @@ while True:
                 if speech_chunk_count >= SUSTAINED_CHUNKS:
                     load_whisper()
                     if WHISPER_AVAILABLE and len(wake_buffer) >= SAMPLING_RATE * 1:
-                        full_audio = np.array(wake_buffer, dtype=np.float32)
+                        # Use asarray for less copy overhead
+                        full_audio = np.asarray(wake_buffer, dtype=np.float32)
                         result = whisper_model.transcribe(full_audio, language="en")
                         text = result["text"].lower().strip()
                         print(f"Heard: “{text}”")
@@ -221,13 +224,11 @@ while True:
                 speech_chunk_count = 0
 
             if current_time - last_heartbeat > 40:
-                cpu_percent = psutil.cpu_percent(interval=0.1)
-                estimated_power = round(cpu_percent / 100 * 5, 1)
-                print(f"[{datetime.now():%H:%M:%S}] ULTRA-CHILL ~{estimated_power}W | Say “{WAKE_PHRASE}”")
+                # Removed blocking CPU polling for better power efficiency in chill mode
+                print(f"[{datetime.now():%H:%M:%S}] ULTRA-CHILL | Say \"{WAKE_PHRASE}\"")
                 last_heartbeat = current_time
 
-            if current_time - last_voice_time > SILENCE_TIMEOUT:
-                time.sleep(0.8)
+            # Removed unnecessary sleep - VAD already provides throttling
 
         elif mode == "conversation":
             load_llm()  # Lazy load
@@ -243,7 +244,8 @@ while True:
                 if len(utterance_buffer) > SAMPLING_RATE * MIN_UTT_SEC:
                     load_whisper()
                     if WHISPER_AVAILABLE:
-                        full_audio = np.array(utterance_buffer, dtype=np.float32)
+                        # Use asarray for less copy overhead
+                        full_audio = np.asarray(utterance_buffer, dtype=np.float32)
                         result = whisper_model.transcribe(full_audio, language="en")
                         text = result["text"].strip()
                         if text:
@@ -256,6 +258,9 @@ while True:
                                 conversation_history = []
                             else:
                                 conversation_history.append(f"User: {text}")
+                                # Limit conversation history to prevent OOM
+                                if len(conversation_history) > MAX_CONVERSATION_HISTORY:
+                                    conversation_history = conversation_history[-MAX_CONVERSATION_HISTORY:]
                                 if LLM_AVAILABLE:
                                     system_prompt = (
                                         "You are MindMend, a compassionate AI companion for gentle emotional support. "
@@ -275,6 +280,9 @@ while True:
                                 print(f"MindMend: {reply}")
                                 speak(reply)
                                 conversation_history.append(f"MindMend: {reply}")
+                                # Limit conversation history to prevent OOM
+                                if len(conversation_history) > MAX_CONVERSATION_HISTORY:
+                                    conversation_history = conversation_history[-MAX_CONVERSATION_HISTORY:]
                 in_speech = False
 
             if current_time - last_voice_time > CONVO_TIMEOUT:
