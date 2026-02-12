@@ -51,14 +51,9 @@ def scan_message(text):
     try:
         if not isinstance(text, str):
             raise ValueError("Input must be a string")
-        # Use search() for early exit instead of findall() - more efficient
-        match = danger_pattern.search(text)
-        if match:
-            matches = [match.group()]
-            count = 1
-        else:
-            matches = []
-            count = 0
+        # Find all matches for accurate threat scoring
+        matches = danger_pattern.findall(text)
+        count = len(matches)
         return {'is_flagged': count > 0, 'score': count, 'matches': matches}
     except Exception as e:
         logging.error(f"Scan error: {e}")
@@ -71,6 +66,7 @@ def toxicity_score(sentence):
         doc = nlp(sentence)
         polarity = doc._.blob.polarity
         # Removed irrelevant entity checks - just use polarity for toxicity detection
+        # Note: entity_count and bad_entities fields maintained for API compatibility (deprecated)
         is_toxic = polarity < -0.2
         return {'toxic': is_toxic, 'polarity': polarity, 'entity_count': 0, 'bad_entities': []}
     except Exception as e:

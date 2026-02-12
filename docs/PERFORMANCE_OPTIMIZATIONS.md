@@ -149,7 +149,7 @@ if current_time - last_voice_time > SILENCE_TIMEOUT:
 ### 4. Memory Management (mindmend_guardian.py)
 
 #### Issue: Unbounded Conversation History
-**Location:** Line 174, 258, 280  
+**Location:** Line 30 (config), 158 (helper function), 261, 280  
 **Impact:** High - potential OOM on long sessions
 
 **Before:**
@@ -161,48 +161,45 @@ conversation_history.append(f"User: {text}")
 
 **After:**
 ```python
-conversation_history = []
+# In config section:
 MAX_CONVERSATION_HISTORY = 20  # Prevent OOM on long sessions
-# ... later ...
+
+# Helper function:
+def limit_conversation_history(history):
+    """Limit conversation history to prevent OOM on long sessions"""
+    if len(history) > MAX_CONVERSATION_HISTORY:
+        return history[-MAX_CONVERSATION_HISTORY:]
+    return history
+
+# Usage:
 conversation_history.append(f"User: {text}")
-# Limit conversation history to prevent OOM
-if len(conversation_history) > MAX_CONVERSATION_HISTORY:
-    conversation_history = conversation_history[-MAX_CONVERSATION_HISTORY:]
+conversation_history = limit_conversation_history(conversation_history)
 ```
 
 **Benefits:**
 - Prevents memory leak on extended conversations
 - Maintains most recent context (20 turns = ~10 exchanges)
 - Ensures stable long-term operation
+- Reusable helper function eliminates code duplication
 
 ### 5. Luna Safety Core Optimizations (luna_safety_core.py)
 
-#### Issue: Inefficient Regex Matching
+#### Issue: Inefficient Regex Matching (Reverted)
 **Location:** Line 54  
 **Impact:** Medium - called on every message
 
-**Before:**
+**Note:** Initially changed to use `search()` for early-exit optimization, but reverted after code review identified security issue. Using `findall()` is necessary to accurately count all dangerous patterns in a message for proper threat scoring. The performance impact is acceptable given the security requirement.
+
+**Current Implementation:**
 ```python
-matches = danger_pattern.findall(text)  # Scans entire text
+matches = danger_pattern.findall(text)  # Must scan entire text for security
 count = len(matches)
 ```
 
-**After:**
-```python
-# Use search() for early exit instead of findall() - more efficient
-match = danger_pattern.search(text)
-if match:
-    matches = [match.group()]
-    count = 1
-else:
-    matches = []
-    count = 0
-```
-
 **Benefits:**
-- Early exit on first match (most common case)
-- Reduces CPU time for threat detection
-- Still returns same result structure
+- Maintains accurate threat scoring
+- Prevents security issues from missing multiple dangerous patterns
+- Compiled regex pattern is still efficient
 
 #### Issue: Irrelevant Entity Classification
 **Location:** Lines 67-68  
@@ -225,6 +222,7 @@ is_toxic = polarity < -0.2
 - Entity labels (FAC, CARDINAL, LOC, PERSON) don't indicate toxicity
 - Simpler, faster detection logic
 - Maintains accuracy while reducing CPU overhead
+- Deprecated fields kept for API compatibility
 
 #### Issue: Inefficient String Truncation
 **Location:** Line 116  
@@ -255,14 +253,15 @@ alert_msg = f"Suspicious chat: '{text[:100]}...'" if len(text) > 100 else f"Susp
 | Process enumeration | -90% startup | Negligible | Startup only |
 | Sleep removal | +1% responsiveness | N/A | ~2% reduction |
 | Conversation history limit | Negligible | Prevents OOM | Long-term stability |
-| Regex early exit | -40% scan time | Negligible | ~2% reduction |
 | Entity classification removal | -15% NLP | Negligible | ~1% reduction |
 
 **Estimated Total Impact:**
-- **Idle Power Reduction:** 15-25% (helps achieve <1W target)
+- **Idle Power Reduction:** 10-20% (helps achieve <1W target)
 - **CPU Overhead Reduction:** ~30% in audio processing loop
 - **Memory Stability:** Prevents OOM on long sessions
 - **Responsiveness:** Slightly improved due to sleep removal
+
+**Note:** Regex early-exit optimization was reverted after code review identified security concerns.
 
 ## Future Optimization Opportunities
 

@@ -28,6 +28,7 @@ MIN_UTT_SEC = 1.0      # minimum speech length to process
 AUDIO_BUFFER_SEC_CHILL = 3
 AUDIO_BUFFER_SEC_MAX = 30  # max context retained
 SAMPLING_RATE = 16000
+MAX_CONVERSATION_HISTORY = 20  # Prevent OOM on long sessions
 
 # Gentle canned replies (fallback if no LLM)
 GENTLE_REPLIES = [
@@ -152,6 +153,12 @@ def load_tts():
     except Exception as e:
         print(f"TTS unavailable: {e}")
 
+def limit_conversation_history(history):
+    """Limit conversation history to prevent OOM on long sessions"""
+    if len(history) > MAX_CONVERSATION_HISTORY:
+        return history[-MAX_CONVERSATION_HISTORY:]
+    return history
+
 load_tts()
 
 # ===================== MAIN LOOP =====================
@@ -171,7 +178,6 @@ in_speech = False
 last_voice_time = time.time()
 last_heartbeat = time.time()
 conversation_history = []
-MAX_CONVERSATION_HISTORY = 20  # Prevent OOM on long sessions
 
 print("Guardian online. Awaiting your voice in deepest chill… Say “hey mindmend”")
 
@@ -258,9 +264,7 @@ while True:
                                 conversation_history = []
                             else:
                                 conversation_history.append(f"User: {text}")
-                                # Limit conversation history to prevent OOM
-                                if len(conversation_history) > MAX_CONVERSATION_HISTORY:
-                                    conversation_history = conversation_history[-MAX_CONVERSATION_HISTORY:]
+                                conversation_history = limit_conversation_history(conversation_history)
                                 if LLM_AVAILABLE:
                                     system_prompt = (
                                         "You are MindMend, a compassionate AI companion for gentle emotional support. "
@@ -280,9 +284,7 @@ while True:
                                 print(f"MindMend: {reply}")
                                 speak(reply)
                                 conversation_history.append(f"MindMend: {reply}")
-                                # Limit conversation history to prevent OOM
-                                if len(conversation_history) > MAX_CONVERSATION_HISTORY:
-                                    conversation_history = conversation_history[-MAX_CONVERSATION_HISTORY:]
+                                conversation_history = limit_conversation_history(conversation_history)
                 in_speech = False
 
             if current_time - last_voice_time > CONVO_TIMEOUT:
