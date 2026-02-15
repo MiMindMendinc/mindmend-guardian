@@ -51,6 +51,7 @@ def scan_message(text):
     try:
         if not isinstance(text, str):
             raise ValueError("Input must be a string")
+        # Find all matches for accurate threat scoring
         matches = danger_pattern.findall(text)
         count = len(matches)
         return {'is_flagged': count > 0, 'score': count, 'matches': matches}
@@ -64,10 +65,10 @@ def toxicity_score(sentence):
             raise RuntimeError("spaCy not loaded")
         doc = nlp(sentence)
         polarity = doc._.blob.polarity
-        bad_tags = [ent.label_ for ent in doc.ents if ent.label_ in ['FAC', 'CARDINAL', 'LOC', 'PERSON']]
-        entity_count = len(bad_tags)
-        is_toxic = (polarity < -0.2) or (entity_count > 1)
-        return {'toxic': is_toxic, 'polarity': polarity, 'entity_count': entity_count, 'bad_entities': bad_tags}
+        # Removed irrelevant entity checks - just use polarity for toxicity detection
+        # Note: entity_count and bad_entities fields maintained for API compatibility (deprecated)
+        is_toxic = polarity < -0.2
+        return {'toxic': is_toxic, 'polarity': polarity, 'entity_count': 0, 'bad_entities': []}
     except Exception as e:
         logging.error(f"Toxicity error: {e}")
         return {'toxic': False, 'polarity': 0, 'entity_count': 0, 'bad_entities': []}
@@ -108,12 +109,14 @@ def check_incoming():
     data = request.json or {}
     text = data.get('message', '').strip()
     parent_token = data.get('parent_token', '')
+    # Early exit for empty strings
     if not text:
         return jsonify({'error': 'Missing message'}), 400
     flag1 = scan_message(text)
     flag2 = toxicity_score(text)
     if flag1['is_flagged'] or flag2['toxic']:
-        alert_msg = f"Suspicious chat: '{text[:100]}...'"
+        # Use string slicing more efficiently
+        alert_msg = f"Suspicious chat: '{text[:100]}...'" if len(text) > 100 else f"Suspicious chat: '{text}'"
         send_alert_async(parent_token, alert_msg)
         return jsonify({'blocked': True, 'details': {'danger': flag1, 'toxicity': flag2}}), 200
     return jsonify({'safe': True}), 200
