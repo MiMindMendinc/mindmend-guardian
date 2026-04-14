@@ -1,30 +1,69 @@
-# MindMend Guardian v2
+# MindMend Guardian: AI-Powered Youth Safety & Protection
 
-Offline voice AI safety guardian for families, running on Faraday-caged Raspberry Pi with crisis detection and 988-safe redirects.
+**Full youth safety AI featuring a gentle voice guardian and a robust child protection backend.**
 
-## Technical Summary
-- **Hardware**: Raspberry Pi with ESP32 wake-word detection, optimized for <1W always-on operation
-- **AI Pipeline**: Whisper STT → fused Triton/CUDA kernel inference → voice synthesis
-- **Security**: Rust AES-GCM encryption for journals, air-gapped Faraday cage enclosure
-- **Safety**: Real-time crisis detection with automatic 988 lifeline integration
-- **Performance**: <300ms response times, solar-ready for remote deployment
+`MindMend Guardian` is a comprehensive safety system designed to protect children in digital and physical environments. Developed by **Michigan MindMend Inc.**, it combines low-power, always-on voice monitoring with a powerful AI backend to provide proactive protection and support for families.
 
-## Impact
-Provides unbreakable privacy and safety for vulnerable users in crisis situations. Built with Michigan grit to ensure families have reliable AI protection when networks fail or threats emerge.
+## 🎯 Features
 
-## Quick Start
+- **Gentle Voice Guardian**: Always-on, low-power voice monitoring for safety cues.
+- **Child Protection Backend**: Proactive detection of potential risks and harmful interactions.
+- **Guardian Mode**: Activates high-power AI analysis when safety thresholds are met.
+- **Privacy-First Design**: All monitoring and analysis happen locally to ensure family privacy.
+- **Michigan Innovation**: Built for families who need reliable, offline-first protection.
+- **Scalable Architecture**: From low-power edge devices to full-power safety analysis.
+
+## 🚀 Quick Start
+
+### Installation
+
 ```bash
 git clone https://github.com/MiMindMendinc/mindmend-guardian.git
 cd mindmend-guardian
 pip install -r requirements.txt
-python main.py
 ```
 
-## Features
-- Voice-activated crisis monitoring
-- Offline LLM processing
-- Encrypted local storage
-- Emergency resource integration
+### Basic Usage
 
-## License
-MIT - Built for good, no strings attached.
+```python
+from guardian import GuardianSystem
+
+# Initialize the guardian
+system = GuardianSystem()
+
+# Start always-on monitoring
+system.start_monitoring()
+```
+
+## 🏗️ Architecture
+
+```
+┌─────────────────────────────────────────┐
+│   Edge Device (Voice Guardian)          │
+└──────────────┬──────────────────────────┘
+               │ (Safety Cue Detected)
+               ▼
+┌─────────────────────────────────────────┐
+│   MindMend Guardian Backend             │
+│  ┌───────────────────────────────────┐  │
+│  │ Risk Analysis Engine              │  │
+│  └───────────────────────────────────┘  │
+│  ┌───────────────────────────────────┐  │
+│  │ Notification System               │  │
+│  └───────────────────────────────────┘  │
+└─────────────────────────────────────────┘
+```
+
+## 🔒 Privacy & Safety
+
+- ✅ Zero Cloud Logs: Your family's data never leaves your home.
+- ✅ Proactive Protection: Designed to detect risks before they escalate.
+- ✅ Offline Reliable: Works even when internet connectivity is unavailable.
+
+## 📄 License
+
+MIT - Built for the people, not the platforms.
+
+---
+
+**Built by Michigan MindMend Inc.** | Privacy-first AI for families | [Website](https://github.com/MiMindMendinc)
