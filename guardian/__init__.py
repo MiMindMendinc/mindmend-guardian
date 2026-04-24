@@ -1,11 +1,31 @@
-"""
-MindMend Guardian - Privacy-first AI guardian for kids and teens.
+"""MindMend Guardian package.
 
-This package contains the core guardian functionality including:
-- Voice activation and conversation
-- Luna safety core for threat detection
-- Geofencing and alerts
+Privacy-first youth-support AI prototype from Michigan MindMend Inc.
+
+The package exposes lightweight, testable safety helpers separately from the
+hardware-dependent voice demo so the core behavior can be imported in CI,
+examples, and downstream apps.
 """
 
-__version__ = "0.1.0"
-__author__ = "MindMend Inc."
+from .core import (
+    CRISIS_FOOTER,
+    GROUNDING_STEPS,
+    GuardianAssessment,
+    assess_text,
+    audit_event,
+    stable_hash,
+    supportive_reply,
+)
+
+__version__ = "0.2.0"
+__author__ = "Michigan MindMend Inc."
+
+__all__ = [
+    "CRISIS_FOOTER",
+    "GROUNDING_STEPS",
+    "GuardianAssessment",
+    "assess_text",
+    "audit_event",
+    "stable_hash",
+    "supportive_reply",
+]
