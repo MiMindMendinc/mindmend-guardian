@@ -1,0 +1,27 @@
+[project]
+name = "mindmend-guardian"
+version = "0.2.0"
+description = "Privacy-first youth safety and wellness support prototype from Michigan MindMend Inc."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "Lyle Perrien II", email = "michiganmindmendinc@proton.me" }
+]
+keywords = [
+  "ai-safety",
+  "offline-ai",
+  "privacy",
+  "youth-safety",
+  "mental-wellness",
+  "local-first"
+]
+
+[project.urls]
+Homepage = "https://github.com/MiMindMendinc/mindmend-guardian"
+Repository = "https://github.com/MiMindMendinc/mindmend-guardian"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"
