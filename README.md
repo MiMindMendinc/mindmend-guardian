@@ -1,40 +1,34 @@
 # MindMend Guardian
 
-**Privacy-first youth safety prototype for local, family-controlled AI support.**
+**Privacy-first edge guardian prototype for youth safety and family wellness.**
 
-MindMend Guardian is an offline-first safety concept from **Michigan MindMend Inc.** It explores how families, schools, and community organizations could use local AI systems to support youth wellness without default cloud logging, hidden data harvesting, or always-online dependency.
+MindMend Guardian is a local-first AI safety prototype designed to help families explore child/family safety workflows without default cloud dependency. It focuses on privacy-first risk detection, calm support language, family-controlled review, and human escalation paths.
 
-The project is intentionally framed as a **prototype**, not a replacement for parents, caregivers, clinicians, crisis responders, or emergency services.
+Built by **Michigan MindMend Inc.** as a portfolio demonstration of responsible, edge-deployable AI safety technology.
 
----
-
-## Mission
-
-Build AI that assists families while keeping humans in control.
-
-MindMend Guardian is designed around four principles:
-
-- **Privacy first** — reduce unnecessary data exposure.
-- **Offline capable** — local-first operation where possible.
-- **Human guided** — parents, guardians, and professionals make final decisions.
-- **Safety aware** — surface risks, resources, and escalation paths when needed.
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](pyproject.toml)
+[![CI](https://github.com/MiMindMendinc/mindmend-guardian/actions/workflows/ci.yml/badge.svg)](https://github.com/MiMindMendinc/mindmend-guardian/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/badge/Tests-pytest-brightgreen)](tests/test_basic.py)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Prototype-blue)](#current-status)
 
 ---
 
-## What this repo demonstrates
+## Problem
 
-- A youth-safety system architecture for local/edge deployment.
-- A gentle guardian-mode concept for wellness and risk signals.
-- Privacy-first product framing for sensitive family environments.
-- A backend direction for safety checks, logs, and guardian workflows.
-- A Michigan MindMend portfolio project focused on AI safety, youth mental wellness, and responsible automation.
+Many youth safety tools create a hard tradeoff:
 
----
+- send sensitive family data to the cloud, or
+- use blunt tools that miss context and feel scary or clinical.
 
-## High-level architecture
+Families need safety support that is private, understandable, and human-guided.
+
+## Solution
+
+MindMend Guardian explores a different pattern:
 
 ```text
-Local input / app event
+Local input / family app event
         ↓
 Guardian safety layer
         ↓
@@ -42,114 +36,149 @@ Risk and wellness check
         ↓
 Supportive response or resource suggestion
         ↓
-Parent/guardian-visible log or escalation path
+Parent / guardian review or escalation path
 ```
 
-Potential deployment targets include:
-
-- family desktop or mini-PC
-- Raspberry Pi / edge device experiments
-- school or nonprofit pilot demos
-- local journaling or wellness companion apps
-- offline-first safety toolkits
+The goal is not to replace parents, clinicians, or crisis teams. The goal is to build a privacy-first support layer that helps surface risk while keeping humans in control.
 
 ---
 
-## Features direction
+## Key Features
 
-- **Local-first monitoring concept** for safety cues and wellness check-ins.
-- **Guardian mode** for stronger review when risk thresholds are detected.
-- **Private logs** intended to be controlled by families or authorized caregivers.
-- **Offline-capable design** for low-connectivity environments.
-- **Youth-appropriate response layer** focused on calm, supportive language.
-- **Human escalation path** for situations that need adult or professional help.
+- **Local-first and offline-capable direction** — designed for laptops, mini-PCs, Raspberry Pi-style devices, or local networks.
+- **Youth-appropriate support language** — calm, supportive response framing instead of fear-based alerts.
+- **Risk-signal detection direction** — grooming language, self-harm signals, bullying patterns, crisis keywords, and distress indicators.
+- **Private family logs** — intended for parent/guardian-controlled review where logging is enabled.
+- **Human escalation paths** — clear boundaries and handoff when adult or professional help is needed.
+- **Configurable sensitivity direction** — families and deployments should be able to tune what counts as risk.
 
 ---
 
-## Quick start
+## Tech Stack
+
+- Python 3.10+
+- Local-first Python package structure
+- Rule-based and prototype safety checks
+- Optional local model direction: Ollama / llama.cpp / Transformers
+- Local storage direction: SQLite or encrypted local logs
+- Test coverage with `pytest`
+- GitHub Actions CI
+
+---
+
+## Quick Demo / How To Try It
+
+Clone and run the current test suite:
 
 ```bash
 git clone https://github.com/MiMindMendinc/mindmend-guardian.git
 cd mindmend-guardian
-pip install -r requirements.txt
+python -m pip install --upgrade pip
+pip install pytest
+pytest
 ```
 
-Example usage direction:
+Prototype/demo paths may change as the repo is packaged. The current tests verify package structure, required files, and Python syntax for key modules.
 
-```python
-from guardian import GuardianSystem
+Suggested future demo command:
 
-system = GuardianSystem()
-system.start_monitoring()
+```bash
+python -m guardian --demo
 ```
-
-Actual module paths may change as the prototype is cleaned up and packaged.
 
 ---
 
-## Safety boundaries
+## Screenshots / Demo Placeholders
 
-MindMend Guardian is not:
+Add these assets next for sponsor/recruiter polish:
 
-- a medical device
-- a therapist
-- a crisis hotline
-- a law-enforcement tool
-- a replacement for parental judgment
-- a guaranteed abuse-detection system
+| Asset | File Path | Purpose |
+|---|---|---|
+| Test run screenshot | `docs/assets/guardian-tests.png` | Shows `pytest` passing |
+| Architecture diagram | `docs/assets/guardian-architecture.png` | Explains local guardian flow |
+| Parent dashboard mock | `docs/assets/guardian-dashboard.png` | Shows family review concept |
+| Edge device photo/mock | `docs/assets/guardian-edge-device.png` | Shows Raspberry Pi / mini-PC direction |
+
+Suggested README image block after assets exist:
+
+```md
+![MindMend Guardian test run](docs/assets/guardian-tests.png)
+![MindMend Guardian architecture](docs/assets/guardian-architecture.png)
+```
+
+---
+
+## Privacy & Safety Commitments
+
+MindMend Guardian is designed around these commitments:
+
+- **No default cloud dependency** for core safety concepts.
+- **Data minimization**: collect only what the workflow needs.
+- **Family-controlled logs** where logging exists.
+- **Human-in-the-loop escalation**: AI does not make final decisions about a child’s safety.
+- **Clear safety boundaries**: supportive software, not a therapist or crisis service.
+- **Truth over hype**: prototype claims stay tied to visible code, docs, and tests.
+
+---
+
+## What MindMend Guardian Does Not Claim
+
+MindMend Guardian does **not** currently claim:
+
+- medical or clinical validation
+- 100% detection accuracy
+- HIPAA / COPPA compliance out of the box
+- replacement for parents, guardians, clinicians, or crisis professionals
+- guaranteed abuse, grooming, self-harm, or bullying detection
+- production readiness for unsupervised child safety use
 
 If someone may be in immediate danger, contact emergency services. In the United States, call or text **988** for the Suicide & Crisis Lifeline.
 
 ---
 
-## Privacy model
+## Current Status
 
-The intended design direction is:
+**Active prototype / portfolio project.**
 
-- no default cloud data harvesting
-- no advertising profile creation
-- local-first processing where possible
-- family-controlled logs and settings
-- transparent safety behavior
-
-Implementation details should be verified per deployment before use in any real environment.
-
----
-
-## Recruiter notes
-
-This project demonstrates work in:
-
-- AI safety product design
-- youth/family privacy thinking
-- local-first system architecture
-- human-in-the-loop safety flows
-- Python backend prototyping
-- responsible AI communication
-
-It is a strong companion project to TrustLayer and OpenClaw Empathy Anchor.
+This repo demonstrates privacy-first child/family safety product thinking, local-first architecture, responsible AI documentation, and early engineering structure. It is not a finished product.
 
 ---
 
 ## Roadmap
 
-- [ ] Clarify installable package structure
-- [ ] Add tests for core safety workflows
-- [ ] Add example configuration files
-- [ ] Add screenshots or a short demo video
-- [ ] Add local storage examples
-- [ ] Add Raspberry Pi / mini-PC deployment notes
-- [ ] Add parent/guardian dashboard mockup
+- [ ] Full safety workflow tests
+- [ ] GitHub Actions CI badge verified green
+- [ ] Docker and Raspberry Pi deployment notes
+- [ ] Parent dashboard v1 mockup
+- [ ] Config file for sensitivity thresholds
+- [ ] Demo video and screenshots
+- [ ] Clear installable package entrypoint
+- [ ] Local logging / storage example
 
 ---
 
-## Built by
+## Recruiter / Sponsor Notes
+
+This project demonstrates:
+
+- responsible AI safety engineering
+- privacy-first / offline-capable product design
+- real-world youth and family safety use-case thinking
+- local-first architecture for sensitive environments
+- end-to-end ownership: detection, escalation, logging, and documentation
+
+It is a strong signal for roles or partnerships involving AI safety, trust and safety, child protection technology, privacy engineering, and community-focused AI.
+
+---
+
+## Built By
 
 **Lyle Perrien II**  
 Founder, **Michigan MindMend Inc.**  
-Owosso, Michigan
+Owosso, Michigan  
+X: [@p_perrien](https://x.com/p_perrien)
 
-Building privacy-first, offline-first AI tools for youth safety, family wellness, and responsible local automation.
+Building privacy-first, offline-capable AI safety tools for kids, families, and communities.
 
 ## License
 
