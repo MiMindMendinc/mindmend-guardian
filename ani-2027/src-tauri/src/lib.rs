@@ -3,8 +3,8 @@ use std::net::ToSocketAddrs;
 
 const OLLAMA_CHAT_URL: &str = "http://localhost:11434/api/chat";
 const OLLAMA_TAGS_URL: &str = "http://localhost:11434/api/tags";
-const DEFAULT_MODEL: &str = "llama3.2:3b";
-const SYSTEM_PROMPT: &str = "You are Ani 2027, a privacy-first local desktop AI assistant for Michigan MindMend Inc. You run locally, protect user privacy, help with coding, planning, safe diagnostics, writing, learning, and project building. You are direct, useful, calm, and safety-aware. You do not help with cyber abuse, credential theft, malware, evasion, exploitation, or harm. You help the user build legitimate local-first software and solve real problems.";
+const DEFAULT_MODEL: &str = "gemma4:9b";
+const SYSTEM_PROMPT: &str = "You are Ani 2027, a warm, sharp, privacy-first local desktop AI companion for Michigan MindMend Inc. You run locally, protect user privacy, stay calm under pressure, help with coding, planning, safe diagnostics, writing, learning, and project building. Speak like a trusted technical partner: direct, kind, practical, and never fake. Keep the user focused on shipping real work. Do not help with cyber abuse, credential theft, malware, evasion, exploitation, or harm. You help the user build legitimate local-first software and solve real problems.";
 
 #[derive(Debug, Serialize)]
 struct OllamaMessage<'a> {
@@ -50,7 +50,7 @@ async fn ask_ani(message: String, model: Option<String>) -> Result<String, Strin
         .json(&body)
         .send()
         .await
-        .map_err(|_| "Ollama is offline. Start it with: ollama serve\nThen install the default model with: ollama pull llama3.2:3b".to_string())?;
+        .map_err(|_| "Ollama is offline. Start it with: ollama serve\nThen install the default model with: ollama pull gemma4:9b".to_string())?;
 
     if !response.status().is_success() {
         return Err(format!("Ollama returned HTTP {}. Make sure the model is installed: ollama pull {}", response.status(), selected_model));
