@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "Ani 2027 — MindMend Local AI Command Center",
+        "title": "Ani 2027 - MindMend Local AI Command Center",
         "width": 1200,
         "height": 780,
         "minWidth": 980,
@@ -25,6 +25,7 @@
   },
   "bundle": {
     "active": true,
-    "targets": "all"
+    "targets": "all",
+    "icon": []
   }
 }
