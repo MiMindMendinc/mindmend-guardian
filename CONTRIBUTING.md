@@ -1,214 +1,81 @@
 # Contributing to MindMend Guardian
 
-Thanks for looking — I'm a solo Michigan dad building MindMend Guardian, a privacy-first, offline child-safety AI. Family, farm, and nonprofit life mean I'm short on time, so any help is deeply appreciated.
+Thank you for your interest in MindMend Guardian.
 
-## How You Can Help
+MindMend Guardian is a Michigan MindMend Inc. prototype for privacy-first youth safety and family wellness workflows. Contributions should protect families, avoid hype, and keep humans in control.
 
-- Small docs fixes (README, install steps)
-- Tests or CI improvements
-- Raspberry Pi / low-power install recipes
-- Voice phrases, sample alerts, and UX wording
-- Code review, debugging, or feature PRs
-- **RPi optimizations** — Battery life and performance improvements
-- **Wake-word improvements** — Better detection accuracy
-- **Dataset-free testing harnesses** — Privacy-preserving test frameworks
-- **Threat-model improvements** — Enhanced safety detection
-- **Ethical messaging** — Compassionate user communications
+## Project Goals
 
-## Quick Start
+MindMend Guardian should remain:
 
-1. **Fork the repository** on GitHub
-2. **Clone your fork** locally:
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/mindmend-guardian.git
-   cd mindmend-guardian
-   ```
-3. **Create a feature branch** following our naming convention:
-   - `feature/short-description` — for new features
-   - `fix/short-description` — for bug fixes
-   ```bash
-   git checkout -b feature/your-improvement
-   ```
-4. **Make changes** and add tests where applicable
-5. **Commit** with clear messages:
-   ```bash
-   git commit -m "feat: add voice activation threshold tuning"
-   ```
-6. **Push** to your fork:
-   ```bash
-   git push origin feature/your-improvement
-   ```
-7. **Open a Pull Request** against `main`
+- privacy-first
+- local-first where possible
+- clear about prototype status
+- careful with youth and family safety language
+- supportive, not clinical or emergency-service replacement
+- human-in-the-loop by design
 
-## Setup & Development Environment
+## Good Contributions
 
-### Initial Setup
+Helpful contributions include:
+
+- safety workflow tests
+- clearer risk-category documentation
+- local-only demo paths
+- parent/guardian review workflow examples
+- encrypted local logging examples
+- Raspberry Pi / edge deployment notes
+- screenshots, diagrams, and demo assets
+- documentation that clarifies limits instead of exaggerating claims
+
+## Development Setup
 
 ```bash
-# Create Python virtual environment
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies (when requirements.txt is available)
-pip install -r requirements.txt
-
-# Initialize whisper.cpp submodule
-git submodule update --init --recursive
-
-# Run test script to verify setup
-python tools/test_tts.py
-
-# Or run main listener script
-python guardian/mindmend_guardian.py
+git clone https://github.com/YOUR-USERNAME/mindmend-guardian.git
+cd mindmend-guardian
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m pip install --upgrade pip
+pip install pytest
+pytest
 ```
-
-### Development Workflow
-
-- Keep your fork updated with upstream changes
-- Work in feature branches, not directly on `main`
-- Test locally before pushing
-- Request reviewers when opening PRs
 
 ## Pull Request Checklist
 
-Before submitting your PR, please ensure:
+A good PR should include:
 
-- [ ] **Reference relevant issue** — Link to the issue your PR addresses
-- [ ] **Include tests** — Add or update tests for your changes
-- [ ] **Document changes** — Update relevant documentation
-- [ ] **Screenshots/samples** — For voice/workflow changes, include audio samples or screenshots
-- [ ] **Request reviewers** — Tag appropriate maintainers
-- [ ] **Link verification steps** — Describe how you tested (e.g., "Tested on Raspberry Pi 4")
-- [ ] **Run linters** — Ensure code passes style checks
-- [ ] **Run tests** — All tests pass locally
+- [ ] clear problem statement
+- [ ] small focused change
+- [ ] tests for new behavior
+- [ ] documentation updates when behavior changes
+- [ ] no real youth, family, medical, school, or private records
+- [ ] no secrets, API keys, `.env` files, or private logs
+- [ ] honest claims tied to visible code and tests
 
-## Testing Guidance
+## Safety Rules
 
-### Running Tests
+Do not add code, prompts, datasets, screenshots, or logs that include real private child/family data.
 
-```bash
-# Run all tests quietly
-pytest -q
+Do not claim that this project is:
 
-# Run tests excluding hardware tests (for CI/development)
-pytest -m "not hardware"
+- clinically validated
+- a therapist
+- a crisis service
+- HIPAA / COPPA compliant out of the box
+- a replacement for parents, guardians, clinicians, schools, or emergency services
 
-# Run hardware tests (requires Raspberry Pi or similar)
-pytest -m hardware
+## Crisis Boundary
 
-# Run specific test file
-pytest tests/test_specific.py -v
-```
+If someone may be in immediate danger, contact local emergency services. In the United States, call or text **988** for the Suicide & Crisis Lifeline.
 
-### Hardware Testing
+## Reporting Security Issues
 
-For performance-sensitive changes:
-- Test on Raspberry Pi 4 or similar edge device
-- Measure power consumption in idle mode (target: <1W)
-- Verify wake-word detection accuracy
-- Check CPU/memory usage under load
-
-### Test Markers
-
-Use pytest markers to categorize tests:
-- `@pytest.mark.hardware` — Requires physical hardware
-- `@pytest.mark.slow` — Long-running tests
-- `@pytest.mark.integration` — Integration tests
-
-## Code Style & Linters
-
-We follow Python best practices:
-
-- **Style Guide:** PEP 8
-- **Type Hints:** Use type annotations
-- **Formatters:** Run `black` and `ruff` (or `flake8`)
-- **Import Sorting:** Keep imports organized
-
-### Running Linters
-
-```bash
-# Format code with black (if installed)
-black .
-
-# Lint with ruff (if installed)
-ruff check .
-
-# Alternative: flake8
-flake8 .
-```
-
-## Code of Conduct
-
-This project follows the [Contributor Covenant Code of Conduct v2.1](https://www.contributor-covenant.org/version/2/1/code_of_conduct/).
-
-This project is about protecting kids — please be respectful, collaborative, and maintain a welcoming environment for all contributors.
-
-## Security & Secrets
-
-**Never commit:**
-- Credentials or API keys
-- Model files (`.pth`, `.bin`, `.ckpt`)
-- Personal data or test data containing PII
-- `.env` files or environment secrets
-
-**To report security issues:**
-- Use GitHub Security Advisories (preferred)
-- Or email the maintainer directly (see README)
+Do not open public issues for vulnerabilities or private data exposure. Use `SECURITY.md`.
 
 ## Communication
-Getting started
-1. Fork the repo  
-2. Create a feature branch: `git checkout -b feature/short-description` (use `feature/` prefix for feature branches)
-3. Set up your development environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   git submodule update --init --recursive
-   ```
-4. Make changes and add tests where applicable  
-5. Test your changes:
-   ```bash
-   pytest -q
-   ```
-   For hardware-specific tests (e.g., Raspberry Pi), mark them with `@pytest.mark.hardware` and run them on the target device.
-6. Commit with clear messages: `git commit -m "Short: what changed"`  
-7. Push: `git push origin feature/short-description`  
-8. Open a Pull Request against `main`
-2. Clone and set up your development environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate
-   # Install dependencies when available (e.g., pip install -r requirements.txt)
-   git submodule update --init --recursive
-   ```
-3. Create a feature branch: `git checkout -b feature/short-description`  
-4. Make changes and add tests where applicable  
-5. Commit with clear messages: `git commit -m "Short: what changed"`  
-6. Push: `git push origin feature/short-description`  
-7. Open a Pull Request against `main`
 
-Testing
-- Run tests with: `pytest -q`
-- Mark device/hardware-specific tests with `@pytest.mark.hardware`
-- Run hardware tests only on Raspberry Pi or when hardware is available
-- Ensure all tests pass before submitting a PR
+Open GitHub issues for bugs, documentation fixes, and focused feature requests. For quick public updates, Lyle Perrien II can also be reached on X at [@p_perrien](https://x.com/p_perrien).
 
-- Open issues for questions or small tasks
-- Tag me on X: @p_perrien if you want a quick ping
-- Be patient — this is a solo-maintained project with limited availability
+## License
 
-## Perks & Thanks
-
-- First contributors (meaningful PRs merged) get a named farm animal (cow, goat, or chicken) and a shoutout in the README. 🐄🐐🐔
-- Contributors who help significantly will be added to the project acknowledgements.
-
-Thank you — your time matters here.
-
----
-Code of conduct & safety
-- This project is about protecting kids; please be respectful and collaborative.
-- We follow our [Code of Conduct](CODE_OF_CONDUCT.md) (based on Contributor Covenant v2.1).
-- We follow our [Code of Conduct](CODE_OF_CONDUCT.md). For reference, we align with principles similar to the Contributor Covenant v2.1 — https://www.contributor-covenant.org/version/2/1/code_of_conduct/
-
-**See also:** [.github/copilot-instructions.md](.github/copilot-instructions.md) for detailed developer guidelines.
+By contributing, you agree that your contribution will be licensed under the MIT License used by this repository.
