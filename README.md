@@ -80,31 +80,8 @@ pytest
 
 Prototype/demo paths may change as the repo is packaged. The current tests verify package structure, required files, and Python syntax for key modules.
 
-Suggested future demo command:
+A dedicated runnable demo command remains on the roadmap. The commands above describe the currently verified path.
 
-```bash
-python -m guardian --demo
-```
-
----
-
-## Screenshots / Demo Placeholders
-
-Add these assets next for sponsor/recruiter polish:
-
-| Asset | File Path | Purpose |
-|---|---|---|
-| Test run screenshot | `docs/assets/guardian-tests.png` | Shows `pytest` passing |
-| Architecture diagram | `docs/assets/guardian-architecture.png` | Explains local guardian flow |
-| Parent dashboard mock | `docs/assets/guardian-dashboard.png` | Shows family review concept |
-| Edge device photo/mock | `docs/assets/guardian-edge-device.png` | Shows Raspberry Pi / mini-PC direction |
-
-Suggested README image block after assets exist:
-
-```md
-![MindMend Guardian test run](docs/assets/guardian-tests.png)
-![MindMend Guardian architecture](docs/assets/guardian-architecture.png)
-```
 
 ---
 
