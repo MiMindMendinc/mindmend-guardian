@@ -4,10 +4,10 @@ from __future__ import annotations
 
 import logging
 import re
-from math import atan2, cos, radians, sin, sqrt
 from typing import Any
 
 from guardian.core import stable_hash
+from guardian.luna.geofence import haversine, is_out_of_bounds
 
 logger = logging.getLogger(__name__)
 
@@ -73,7 +73,6 @@ def _load_nlp():
     _nlp_load_attempted = True
     try:
         import spacy
-        from spacytextblob.spacytextblob import SpacyTextBlob
 
         model = spacy.load("en_core_web_sm")
         model.add_pipe("spacytextblob")
@@ -128,32 +127,6 @@ def toxicity_score(sentence: str) -> dict[str, Any]:
         return {"toxic": False, "polarity": 0, "entity_count": 0, "bad_entities": []}
 
 
-def haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
-    radius_km = 6371
-    dlat = radians(lat2 - lat1)
-    dlon = radians(lon2 - lon1)
-    a = sin(dlat / 2) ** 2 + cos(radians(lat1)) * cos(radians(lat2)) * sin(dlon / 2) ** 2
-    c = 2 * atan2(sqrt(a), sqrt(1 - a))
-    return radius_km * c
-
-
-def is_out_of_bounds(
-    lat: float,
-    lon: float,
-    *,
-    safe_lat: float,
-    safe_lon: float,
-    radius_km: float,
-) -> bool:
-    try:
-        lat_value = float(lat)
-        lon_value = float(lon)
-        distance = haversine(lat_value, lon_value, safe_lat, safe_lon)
-        return distance > radius_km
-    except (TypeError, ValueError):
-        return False
-
-
 def build_chat_alert_message(text: str) -> str:
     """Return a privacy-preserving alert message without raw chat content.
 
@@ -170,3 +143,12 @@ def build_chat_alert_message(text: str) -> str:
         f"(content_sha256={content_hash[:16]}..., length_chars={len(normalized)}). "
         "Raw message content is intentionally omitted by default."
     )
+
+
+__all__ = [
+    "build_chat_alert_message",
+    "haversine",
+    "is_out_of_bounds",
+    "scan_message",
+    "toxicity_score",
+]
