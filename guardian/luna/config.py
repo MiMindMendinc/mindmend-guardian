@@ -33,6 +33,8 @@ def load_config() -> LunaConfig:
     """Load Luna settings from the environment.
 
     ``LUNA_SECRET_KEY`` is required for any runtime that signs or verifies JWTs.
+    API authentication is enabled by default. Local demos that intentionally run
+    without bearer-token checks must opt out with ``LUNA_REQUIRE_AUTH=false``.
     """
 
     secret_key = os.environ.get("LUNA_SECRET_KEY", "").strip()
@@ -52,6 +54,6 @@ def load_config() -> LunaConfig:
         flask_debug=_env_bool("LUNA_FLASK_DEBUG", default=False),
         flask_host=os.environ.get("LUNA_FLASK_HOST", "127.0.0.1"),
         flask_port=int(os.environ.get("LUNA_FLASK_PORT", "5000")),
-        require_auth=_env_bool("LUNA_REQUIRE_AUTH", default=False),
+        require_auth=_env_bool("LUNA_REQUIRE_AUTH", default=True),
         auth_bootstrap_token=os.environ.get("LUNA_AUTH_BOOTSTRAP_TOKEN", "").strip() or None,
     )
