@@ -1,162 +1,238 @@
 # MindMend Guardian
 
-**Privacy-first edge guardian prototype for youth safety and family wellness.**
+**Privacy-first, local-first AI safety prototype for youth and family wellness.**
 
-MindMend Guardian is a local-first AI safety prototype designed to help families explore child/family safety workflows without default cloud dependency. It focuses on privacy-first risk detection, calm support language, family-controlled review, and human escalation paths.
+MindMend Guardian is a portfolio-grade engineering prototype from **Michigan MindMend Inc.** It demonstrates how families can explore youth safety workflows with risk-signal detection, calm support language, privacy-preserving audit events, and human-in-the-loop review — without default cloud dependency or unsupervised automation.
 
-Built by **Michigan MindMend Inc.** as a portfolio demonstration of responsible, edge-deployable AI safety technology.
-
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](pyproject.toml)
+[![Python](https://img.shields.io/badge/Python-3.11-blue)](pyproject.toml)
 [![CI](https://github.com/MiMindMendinc/mindmend-guardian/actions/workflows/ci.yml/badge.svg)](https://github.com/MiMindMendinc/mindmend-guardian/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/badge/Tests-pytest-brightgreen)](tests/test_basic.py)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Prototype-blue)](#current-status)
+[![Status](https://img.shields.io/badge/Status-Prototype-blue)](#project-status)
+
+> Built by Michigan MindMend Inc. as a privacy-first responsible AI safety prototype.
 
 ---
 
-## Problem
+## What this is
 
-Many youth safety tools create a hard tradeoff:
+- A **local-first safety layer** with import-safe core helpers in `guardian/core.py`
+- A **runnable CLI demo** (`python -m guardian.demo`) using synthetic sample text only
+- An optional **Streamlit dashboard demo** for recruiters, sponsors, and contributors
+- A modular **Luna API backend** for message/location safety checks (prototype)
+- A **voice runtime sketch** for edge deployment experiments (hardware-dependent)
+- Honest documentation for privacy, threat modeling, and responsible use
 
-- send sensitive family data to the cloud, or
-- use blunt tools that miss context and feel scary or clinical.
+## What this is not
 
-Families need safety support that is private, understandable, and human-guided.
-
-## Solution
-
-MindMend Guardian explores a different pattern:
-
-```text
-Local input / family app event
-        ↓
-Guardian safety layer
-        ↓
-Risk and wellness check
-        ↓
-Supportive response or resource suggestion
-        ↓
-Parent / guardian review or escalation path
-```
-
-The goal is not to replace parents, clinicians, or crisis teams. The goal is to build a privacy-first support layer that helps surface risk while keeping humans in control.
-
----
-
-## Key Features
-
-- **Local-first and offline-capable direction** — designed for laptops, mini-PCs, Raspberry Pi-style devices, or local networks.
-- **Youth-appropriate support language** — calm, supportive response framing instead of fear-based alerts.
-- **Risk-signal detection direction** — grooming language, self-harm signals, bullying patterns, crisis keywords, and distress indicators.
-- **Private family logs** — intended for parent/guardian-controlled review where logging is enabled.
-- **Human escalation paths** — clear boundaries and handoff when adult or professional help is needed.
-- **Configurable sensitivity direction** — families and deployments should be able to tune what counts as risk.
-
----
-
-## Tech Stack
-
-- Python 3.10+
-- Local-first Python package structure
-- Rule-based and prototype safety checks
-- Optional local model direction: Ollama / llama.cpp / Transformers
-- Local storage direction: SQLite or encrypted local logs
-- Test coverage with `pytest`
-- GitHub Actions CI
-
----
-
-## Quick Demo / How To Try It
-
-Clone and run the current test suite:
-
-```bash
-git clone https://github.com/MiMindMendinc/mindmend-guardian.git
-cd mindmend-guardian
-python -m pip install --upgrade pip
-pip install pytest
-pytest
-```
-
-Prototype/demo paths may change as the repo is packaged. The current tests verify package structure, required files, and Python syntax for key modules.
-
-A dedicated runnable demo command remains on the roadmap. The commands above describe the currently verified path.
-
-
----
-
-## Privacy & Safety Commitments
-
-MindMend Guardian is designed around these commitments:
-
-- **No default cloud dependency** for core safety concepts.
-- **Data minimization**: collect only what the workflow needs.
-- **Family-controlled logs** where logging exists.
-- **Human-in-the-loop escalation**: AI does not make final decisions about a child’s safety.
-- **Clear safety boundaries**: supportive software, not a therapist or crisis service.
-- **Truth over hype**: prototype claims stay tied to visible code, docs, and tests.
-
----
-
-## What MindMend Guardian Does Not Claim
-
-MindMend Guardian does **not** currently claim:
+MindMend Guardian does **not** claim:
 
 - medical or clinical validation
-- 100% detection accuracy
+- guaranteed detection of abuse, grooming, bullying, or self-harm
 - HIPAA / COPPA compliance out of the box
-- replacement for parents, guardians, clinicians, or crisis professionals
-- guaranteed abuse, grooming, self-harm, or bullying detection
-- production readiness for unsupervised child safety use
+- production readiness for unsupervised child safety
+- replacement for parents, guardians, clinicians, or emergency services
 
 If someone may be in immediate danger, contact emergency services. In the United States, call or text **988** for the Suicide & Crisis Lifeline.
 
 ---
 
-## Current Status
+## Architecture
 
-**Active prototype / portfolio project.**
+```mermaid
+flowchart TD
+    A[Synthetic sample or family app event] --> B[Guardian safety layer]
+    B --> C[guardian/core.py rules engine]
+    C --> D[Risk level + categories]
+    C --> E[Supportive response framing]
+    C --> F[Privacy-preserving audit hash]
+    D --> G[Human review recommendation]
+    E --> G
+    F --> H[Optional local logs / API alerts]
 
-This repo demonstrates privacy-first child/family safety product thinking, local-first architecture, responsible AI documentation, and early engineering structure. It is not a finished product.
+    subgraph Components
+        I[guardian/demo CLI]
+        J[guardian/dashboard Streamlit]
+        K[guardian/luna API]
+        L[guardian/mindmend_guardian voice runtime]
+    end
+
+    B --> I
+    B --> J
+    B --> K
+    B --> L
+```
+
+See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for module boundaries and design notes.
+
+---
+
+## Quickstart
+
+```bash
+git clone https://github.com/MiMindMendinc/mindmend-guardian.git
+cd mindmend-guardian
+python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -e ".[dev]"
+pytest
+```
+
+## Run the local demo
+
+No cloud services, credentials, or real child data required:
+
+```bash
+python -m guardian.demo
+```
+
+JSON output:
+
+```bash
+python -m guardian.demo --json
+```
+
+The demo shows:
+
+- risk level (`low`, `medium`, `high`, `crisis`)
+- matched signal categories
+- supportive response text
+- whether human review is recommended
+- a privacy-preserving audit hash (raw text is not stored by default)
+
+## Optional dashboard demo
+
+```bash
+pip install -e ".[simulator]"
+python -m guardian.dashboard
+# or: streamlit run guardian/dashboard/app.py
+```
+
+Uses synthetic sample messages only. No Firebase or external APIs required.
+
+---
+
+## Run tests
+
+```bash
+pip install -e ".[dev,api]"
+pytest
+ruff check guardian tests
+ruff format --check guardian tests
+```
+
+---
+
+## Privacy and safety principles
+
+- **Local-first by design** — core logic runs without cloud dependency
+- **Data minimization** — audit events store hashes, not raw text by default
+- **Human-in-the-loop** — AI suggests; trusted adults decide
+- **Supportive language** — calm framing instead of fear-based alerts
+- **Honest scope** — prototype status is visible in docs and README
+
+Details: [`docs/PRIVACY_AND_SAFETY.md`](docs/PRIVACY_AND_SAFETY.md)
+
+---
+
+## Security model summary
+
+- Secrets and credentials come from environment variables (see [`.env.example`](.env.example))
+- Luna API defaults bind to `127.0.0.1` with debug disabled
+- Optional JWT auth for safety endpoints (`LUNA_REQUIRE_AUTH=true`)
+- Request validation on API payloads
+- CI runs linting, tests, dependency audit, and secret-pattern checks
+
+Details: [`docs/SECURITY_CONFIG.md`](docs/SECURITY_CONFIG.md) · [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md)
+
+---
+
+## Project status
+
+**Active prototype / portfolio project (v0.3.0).**
+
+Verified today:
+
+- import-safe core safety helpers with tests
+- local CLI demo and optional dashboard demo
+- modular Luna API with env-based configuration
+- GitHub Actions CI (pytest, ruff, pip-audit, secret scan)
+
+Still evolving:
+
+- voice runtime integration with `guardian/core.py`
+- encrypted local logging example
+- parent review UI
+- edge deployment packaging (Docker / Raspberry Pi)
+
+Details: [`docs/STATUS.md`](docs/STATUS.md)
 
 ---
 
 ## Roadmap
 
-- [ ] Full safety workflow tests
-- [ ] GitHub Actions CI badge verified green
-- [ ] Docker and Raspberry Pi deployment notes
-- [ ] Parent dashboard v1 mockup
-- [ ] Config file for sensitivity thresholds
-- [ ] Demo video and screenshots
-- [ ] Clear installable package entrypoint
-- [ ] Local logging / storage example
+See [`docs/ROADMAP.md`](docs/ROADMAP.md). Near-term focus:
+
+- synthetic scenario test expansion
+- parent/guardian review workflow mock
+- encrypted local audit log example
+- deployment notes for edge devices
+- demo screenshots and short walkthrough video
 
 ---
 
-## Recruiter / Sponsor Notes
+## Documentation
 
-This project demonstrates:
-
-- responsible AI safety engineering
-- privacy-first / offline-capable product design
-- real-world youth and family safety use-case thinking
-- local-first architecture for sensitive environments
-- end-to-end ownership: detection, escalation, logging, and documentation
-
-It is a strong signal for roles or partnerships involving AI safety, trust and safety, child protection technology, privacy engineering, and community-focused AI.
+| Doc | Purpose |
+|-----|---------|
+| [`docs/DEMO.md`](docs/DEMO.md) | Demo commands and sample output |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Module layout and data flow |
+| [`docs/API.md`](docs/API.md) | Luna HTTP API contract |
+| [`docs/SECURITY_CONFIG.md`](docs/SECURITY_CONFIG.md) | Environment variables and safe defaults |
+| [`docs/PRIVACY_AND_SAFETY.md`](docs/PRIVACY_AND_SAFETY.md) | Privacy and safety principles |
+| [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md) | Threat model and mitigations |
+| [`SETUP.md`](SETUP.md) | Full installation guide |
 
 ---
 
-## Built By
+## Contributing
+
+We welcome thoughtful contributions that respect privacy-first design and human-in-the-loop safety boundaries.
+
+Read [`CONTRIBUTING.md`](CONTRIBUTING.md) before opening a PR.
+
+---
+
+## Responsible disclosure
+
+Report security concerns privately following [`SECURITY.md`](SECURITY.md). Do not open public issues for sensitive vulnerabilities.
+
+---
+
+## Built by
 
 **Lyle Perrien II**  
 Founder, **Michigan MindMend Inc.**  
-Owosso, Michigan  
-X: [@p_perrien](https://x.com/p_perrien)
+Owosso, Michigan
 
 Building privacy-first, offline-capable AI safety tools for kids, families, and communities.
 
 ## License
 
 MIT
+
+---
+
+## Visual preview
+
+> Screenshot and demo GIF placeholders — capture after running the dashboard locally.
+
+| CLI demo | Dashboard demo |
+|----------|----------------|
+| `docs/assets/cli-demo-placeholder.png` | `docs/assets/dashboard-demo-placeholder.png` |
+
+```bash
+# Suggested capture commands (run locally)
+python -m guardian.demo > docs/assets/cli-demo-sample.txt
+python -m guardian.dashboard
+```
