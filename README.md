@@ -191,15 +191,24 @@ See [`docs/ROADMAP.md`](docs/ROADMAP.md). Near-term focus:
 | [`docs/SECURITY_CONFIG.md`](docs/SECURITY_CONFIG.md) | Environment variables and safe defaults |
 | [`docs/PRIVACY_AND_SAFETY.md`](docs/PRIVACY_AND_SAFETY.md) | Privacy and safety principles |
 | [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md) | Threat model and mitigations |
+| [`docs/RELEASE.md`](docs/RELEASE.md) | Versioning and release process |
+| [`CHANGELOG.md`](CHANGELOG.md) | Version history |
 | [`SETUP.md`](SETUP.md) | Full installation guide |
 
 ---
 
 ## Contributing
 
-We welcome thoughtful contributions that respect privacy-first design and human-in-the-loop safety boundaries.
+We welcome thoughtful contributions that respect privacy-first design and
+human-in-the-loop safety boundaries.
 
-Read [`CONTRIBUTING.md`](CONTRIBUTING.md) before opening a PR.
+- Read [`CONTRIBUTING.md`](CONTRIBUTING.md) before opening a PR
+- Follow our [`Code of Conduct`](CODE_OF_CONDUCT.md)
+- Use [issue templates](https://github.com/MiMindMendinc/mindmend-guardian/issues/new/choose) for bugs and features
+- See [`SUPPORT.md`](SUPPORT.md) for help routing
+
+This project is released under the [MIT License](LICENSE). See [`CHANGELOG.md`](CHANGELOG.md)
+for version history.
 
 ---
 

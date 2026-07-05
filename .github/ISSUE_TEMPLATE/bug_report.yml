@@ -1,0 +1,60 @@
+name: Bug report
+description: Report a reproducible defect in MindMend Guardian
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve MindMend Guardian. Do **not** include real youth,
+        family, medical, or private data in this report.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Commands, inputs, or API calls that trigger the issue.
+      placeholder: |
+        1. pip install -e ".[dev,api]"
+        2. export LUNA_SECRET_KEY="..."
+        3. pytest tests/test_luna.py -k ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version, optional extras installed, and commit or tag if known.
+      placeholder: |
+        - OS: Ubuntu 24.04
+        - Python: 3.11.9
+        - Extras: dev, api
+        - Version: 0.3.0
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety & privacy checklist
+      options:
+        - label: This report uses synthetic or anonymized data only
+          required: true
+        - label: I did not include secrets, API keys, or `.env` contents
+          required: true

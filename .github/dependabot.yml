@@ -1,0 +1,27 @@
+version: 2
+updates:
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      python-dev:
+        patterns:
+          - "pytest*"
+          - "ruff*"
+          - "pip-audit*"
+      python-api:
+        patterns:
+          - "Flask*"
+          - "PyJWT*"
+          - "firebase-admin*"
+          - "spacy*"
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 3

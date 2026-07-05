@@ -190,7 +190,8 @@ Models are not included in the repository due to size. Download them separately:
 - All processing happens locally on your device
 - No internet connectivity required for core features
 - No telemetry or data collection
-- See `CONTRIBUTING.md` for security guidelines
+- See [`SECURITY.md`](SECURITY.md) for vulnerability reporting
+- See [`docs/SECURITY_CONFIG.md`](docs/SECURITY_CONFIG.md) for environment variables
 
 ## Getting Help
 
