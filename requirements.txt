@@ -11,4 +11,4 @@
 # This file remains for backward compatibility with older setup docs.
 # Runtime dependency metadata lives in pyproject.toml optional extras.
 
--e .[all]
+-e ".[dev]"
