@@ -139,7 +139,7 @@ Details: [`docs/PRIVACY_AND_SAFETY.md`](docs/PRIVACY_AND_SAFETY.md)
 
 - Secrets and credentials come from environment variables (see [`.env.example`](.env.example))
 - Luna API defaults bind to `127.0.0.1` with debug disabled
-- Optional JWT auth for safety endpoints (`LUNA_REQUIRE_AUTH=true`)
+- JWT auth enabled by default for safety endpoints (`LUNA_REQUIRE_AUTH=true`)
 - Request validation on API payloads
 - CI runs linting, tests, dependency audit, and secret-pattern checks
 

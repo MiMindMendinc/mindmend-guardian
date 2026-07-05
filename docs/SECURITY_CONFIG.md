@@ -31,7 +31,7 @@ python guardian/luna/luna_safety_core.py
 |----------|---------|-------|
 | `LUNA_FLASK_HOST` | `127.0.0.1` | Avoid `0.0.0.0` unless you understand exposure |
 | `LUNA_FLASK_DEBUG` | `false` | Never enable debug on shared networks |
-| `LUNA_REQUIRE_AUTH` | `false` | Set `true` for JWT-protected safety endpoints |
+| `LUNA_REQUIRE_AUTH` | `true` | Set `false` only for deliberate local-only demos |
 | `LUNA_FIREBASE_CREDENTIALS` | unset | Optional path to Firebase service account JSON |
 
 ### Optional hardening
@@ -44,7 +44,9 @@ python guardian/luna/luna_safety_core.py
 ## Authentication model (prototype)
 
 - `/check_chat` and `/check_location` accept POST JSON payloads.
-- When `LUNA_REQUIRE_AUTH=true`, callers must send `Authorization: Bearer <jwt>`.
+- Safety endpoints require JWT bearer auth by default (`LUNA_REQUIRE_AUTH=true`)
+- Opt out with `LUNA_REQUIRE_AUTH=false` only for deliberate local-only demos
+- When auth is enabled, callers must send `Authorization: Bearer <jwt>`.
 - `/auth_kid` is POST-only and intended for local development demos.
 - Bootstrap token header: `X-Luna-Bootstrap-Token`
 

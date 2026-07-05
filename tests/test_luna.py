@@ -50,11 +50,13 @@ def test_toxicity_score_uses_keyword_fallback_without_spacy():
     assert result["toxic"] is True
 
 
-def test_build_chat_alert_message_truncates_preview():
-    message = build_chat_alert_message("x" * 200, max_preview=50)
+def test_build_chat_alert_message_omits_raw_text():
+    raw_text = "please meet me alone at the hotel after school"
+    message = build_chat_alert_message(raw_text)
 
-    assert len(message) < 200
-    assert "..." in message
+    assert raw_text not in message
+    assert "meet me" not in message
+    assert "length_chars=" in message
 
 
 def test_check_chat_blocks_flagged_message(client):

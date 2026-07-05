@@ -20,7 +20,7 @@ def initialize_firebase(credentials_path: str | None) -> bool:
         return True
 
     if not credentials_path:
-        logger.info("Firebase credentials not configured; alerts will be logged only.")
+        logger.info("Firebase credentials not configured; alerts remain local-only.")
         return False
 
     try:
@@ -53,11 +53,11 @@ def send_alert_async(
         try:
             from firebase_admin import messaging
         except ImportError:
-            logger.warning("Firebase unavailable. Alert suppressed: %s", alert_msg)
+            logger.warning("Firebase unavailable. Alert suppressed without logging message body.")
             return
 
         if not _firebase_initialized:
-            logger.warning("Firebase unavailable. Alert suppressed: %s", alert_msg)
+            logger.warning("Firebase unavailable. Alert suppressed without logging message body.")
             return
 
         message = messaging.Message(
@@ -67,6 +67,6 @@ def send_alert_async(
         try:
             messaging.send(message)
         except Exception as exc:
-            logger.error("Alert failed: %s", exc)
+            logger.error("Alert delivery failed: %s", exc)
 
     Thread(target=_send, daemon=True).start()

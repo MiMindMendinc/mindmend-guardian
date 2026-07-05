@@ -26,7 +26,7 @@ def create_app(config: LunaConfig | None = None) -> Flask:
     Safe defaults:
     - binds to 127.0.0.1 unless configured otherwise
     - debug disabled unless ``LUNA_FLASK_DEBUG=true``
-    - JWT auth optional via ``LUNA_REQUIRE_AUTH``
+    - JWT auth enabled by default via ``LUNA_REQUIRE_AUTH`` (opt out for local demos only)
     """
 
     app_config = config or load_config()

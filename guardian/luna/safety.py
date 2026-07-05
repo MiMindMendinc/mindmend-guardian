@@ -6,6 +6,7 @@ import logging
 import re
 from typing import Any
 
+from guardian.core import stable_hash
 from guardian.luna.geofence import haversine, is_out_of_bounds
 
 logger = logging.getLogger(__name__)
@@ -126,12 +127,22 @@ def toxicity_score(sentence: str) -> dict[str, Any]:
         return {"toxic": False, "polarity": 0, "entity_count": 0, "bad_entities": []}
 
 
-def build_chat_alert_message(text: str, *, max_preview: int = 100) -> str:
-    """Return a privacy-bounded alert message without logging raw chat text elsewhere."""
+def build_chat_alert_message(text: str) -> str:
+    """Return a privacy-preserving alert message without raw chat content.
 
-    preview = text[:max_preview]
-    suffix = "..." if len(text) > max_preview else ""
-    return f"Suspicious chat detected (hash preview only): '{preview}{suffix}'"
+    Alerts are allowed to communicate that a safety event occurred, but they should
+    not carry the child's raw message through logs, push providers, or screenshots.
+    The hash lets a trusted local review workflow correlate the event without
+    exposing the content by default.
+    """
+
+    normalized = text or ""
+    content_hash = stable_hash(normalized)
+    return (
+        "Suspicious chat detected "
+        f"(content_sha256={content_hash[:16]}..., length_chars={len(normalized)}). "
+        "Raw message content is intentionally omitted by default."
+    )
 
 
 __all__ = [

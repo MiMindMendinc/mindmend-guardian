@@ -48,6 +48,12 @@ st.success(result.supportive_response)
 st.subheader("Privacy notes")
 st.write(result.privacy_note)
 
+st.subheader("Project status")
+st.write(
+    "Active prototype (v0.3.0). Portfolio-grade demo — not clinical software, not "
+    "HIPAA/COPPA-ready, and not for unsupervised child-safety deployment."
+)
+
 st.subheader("Audit hash (privacy-preserving)")
 st.code(result.audit_hash, language="text")
 

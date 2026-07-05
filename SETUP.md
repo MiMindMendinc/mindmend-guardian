@@ -90,9 +90,10 @@ export LUNA_SECRET_KEY="replace-with-a-long-random-secret-at-least-32-characters
 python guardian/luna/luna_safety_core.py
 ```
 
-For local development you can optionally protect token issuance with
-`LUNA_AUTH_BOOTSTRAP_TOKEN`. Safety endpoints can require JWT bearer auth when
-`LUNA_REQUIRE_AUTH=true`.
+For local development you can protect token issuance with
+`LUNA_AUTH_BOOTSTRAP_TOKEN`. Safety endpoints require JWT bearer auth by default
+(`LUNA_REQUIRE_AUTH=true`). Set `LUNA_REQUIRE_AUTH=false` only for deliberate
+local-only demos without bearer tokens.
 
 **Run Luna tests:**
 ```bash
