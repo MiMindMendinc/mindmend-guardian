@@ -20,7 +20,7 @@ jobs:
       - name: Install project and dev tools
         run: |
           python -m pip install --upgrade pip
-          pip install -e ".[dev,api]"
+          pip install -e ".[dev]" "Flask>=3.0,<4" "PyJWT>=2.12"
 
       - name: Lint
         run: ruff check guardian tests
