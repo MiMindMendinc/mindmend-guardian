@@ -1,38 +1,14 @@
-# Core dependencies for MindMend Guardian
+# MindMend Guardian dependency manifest
+#
+# Recommended install paths:
+#   pip install -e .                 # import-safe core helpers only
+#   pip install -e ".[dev]"          # core + pytest
+#   pip install -e ".[luna,dev]"     # Luna backend + tests
+#   pip install -e ".[voice]"        # voice runtime extras
+#   pip install -e ".[simulator]"    # Perrien simulator extras
+#   pip install -e ".[all]"          # everything documented in SETUP.md
+#
+# This file remains for backward compatibility with older setup docs.
+# Runtime dependency metadata lives in pyproject.toml optional extras.
 
-# Machine Learning & Scientific Computing
-torch
-numpy
-pandas
-scikit-learn
-scipy
-
-# Visualization (for Perrien Simulator)
-streamlit
-plotly
-
-# Guardian-specific dependencies
-pyaudio  # For audio input
-psutil  # For system monitoring
-
-# Optional dependencies for advanced features
-# Uncomment as needed:
-
-# For Whisper (speech recognition)
-# whisper-cpp-python
-
-# For LLM support  
-# llama-cpp-python
-
-# For TTS (text-to-speech)
-# pyttsx3
-
-# For Luna Safety Core
-# flask
-# PyJWT
-# firebase-admin
-# spacy
-# spacytextblob
-
-# For VAD (voice activity detection)
-# onnxruntime
+-e .[all]
