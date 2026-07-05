@@ -4,7 +4,7 @@
 
 ### Prerequisites
 
-- Python 3.10 or higher (CI tests Python 3.11)
+- Python 3.11 (minimum 3.11; CI tests 3.11)
 - Git
 - (Optional) CUDA-capable GPU for enhanced performance
 
@@ -30,15 +30,17 @@
    Component-specific extras:
 
    ```bash
-   pip install -e ".[luna,dev]"      # Luna backend
+   pip install -e ".[api,dev]"       # Luna/API backend
+   pip install -e ".[luna,dev]"      # alias of api extra
    pip install -e ".[voice]"         # voice runtime
    pip install -e ".[simulator]"     # Perrien simulator
    pip install -e ".[all]"           # everything documented below
    ```
 
-4. **Test the installation:**
+4. **Run the local demo and tests:**
    ```bash
-   python tools/test_tts.py
+   python -m guardian.demo
+   pytest
    ```
 
 ## Component-Specific Setup
@@ -84,7 +86,7 @@ python -m spacy download en_core_web_sm
 
 **Run Luna API:**
 ```bash
-export LUNA_SECRET_KEY="replace-with-a-long-random-secret"
+export LUNA_SECRET_KEY="replace-with-a-long-random-secret-at-least-32-characters"
 python guardian/luna/luna_safety_core.py
 ```
 
@@ -140,7 +142,7 @@ python -m py_compile perrien-simulator/app.py
 For low-power deployment on Raspberry Pi:
 
 1. Use Raspberry Pi OS (64-bit recommended)
-2. Install Python 3.10+: `sudo apt install python3 python3-pip python3-venv`
+2. Install Python 3.11+: `sudo apt install python3 python3-pip python3-venv`
 3. Install audio dependencies: `sudo apt install portaudio19-dev python3-pyaudio`
 4. Follow the basic installation steps above
 5. Consider using lighter model variants for better performance
