@@ -1,0 +1,8 @@
+# Default owners for review routing. Update GitHub usernames as the maintainer team grows.
+* @MiMindMendinc
+
+/guardian/luna/ @MiMindMendinc
+/docs/ @MiMindMendinc
+/.github/ @MiMindMendinc
+SECURITY.md @MiMindMendinc
+CODE_OF_CONDUCT.md @MiMindMendinc

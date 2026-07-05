@@ -2,172 +2,105 @@
 
 ## Project Overview
 
-**MindMend Guardian** — 100% offline, privacy-first guardian AI for kids/teens/families. Local wake-word listener, Luna threat/grooming detection, geofencing, parent alerts, low-power on Raspberry Pi. No cloud, no telemetry. Provides compassionate resources (e.g., [988 Suicide & Crisis Lifeline](https://988lifeline.org/)) for distress cases.
+**MindMend Guardian** is a privacy-first, local-first youth safety prototype from
+Michigan MindMend Inc. It includes a rules engine, Luna safety API, synthetic
+CLI/dashboard demos, and an optional voice runtime. The project is MIT-licensed
+open source and is **not** a clinical or crisis service.
 
 ## Tech Stack
 
-- **Python 3** — Core language
-- **whisper.cpp** — Voice processing (requires submodule setup)
-- **llama.cpp** (optional) — Local LLMs
-- **Threading + VAD** — Low-power always-listening
-- **pytest** — Testing framework
-- **GitHub Actions** — CI/CD
+- **Python 3.11+** — core language and packaging (`pyproject.toml`)
+- **Flask + PyJWT** — Luna API backend (optional `[api]` extra)
+- **Streamlit** — optional dashboard demo (`[simulator]` extra)
+- **pytest + ruff + pip-audit** — tests, lint/format, dependency audit
+- **GitHub Actions** — CI on every push/PR
 
-Note: whisper.cpp is included as a submodule and requires initialization during setup.
+Voice runtime dependencies (`[voice]` extra) are heavy and lazy-loaded in
+`guardian/mindmend_guardian.py` so imports remain safe for CI.
 
 ## Preferred Coding Style and Conventions
 
-- Use **idiomatic Python** with type hints
-- Follow **PEP 8** style guide
-- Prefer **modular components** for maintainability
-- **Unit-test-first** for safety-sensitive logic
-- Avoid heavyweight libraries that increase power/CPU usage
-- Document all public module APIs with clear docstrings
-- Use meaningful variable names that convey intent
+- Use idiomatic Python with type hints
+- Follow PEP 8 via `ruff` (configured in `pyproject.toml`)
+- Prefer modular components for maintainability
+- Unit-test-first for safety-sensitive logic
+- Document public module APIs with clear docstrings
 - Keep functions focused and single-purpose
 
 ## Important Rules
 
 **Never introduce:**
-- Cloud dependencies
-- Telemetry or analytics
-- External API calls
-- Model weights in commits
-- `.env` files or personal data
-- Secrets or credentials
+
+- Secrets, credentials, or committed `.env` files
+- Real youth/family/private data in code, tests, or docs
+- Telemetry or undisclosed external data collection
+- Over-claims about clinical validation or compliance
 
 **Always:**
-- Add tests for voice activation, threat logic, and geofencing
-- Follow linting and formatting rules
-- Obtain approval before changing legacy/safety-critical modules
-- Run tests before submitting PRs
-- Document breaking changes
+
+- Add tests for safety-sensitive behavior changes
+- Run `ruff` and `pytest` before submitting PRs
+- Update docs and `CHANGELOG.md` for user-visible changes
+- Report security issues via [`SECURITY.md`](../SECURITY.md)
 
 ## Setup & Developer Workflow
 
 ```bash
-# Clone repository
 git clone https://github.com/MiMindMendinc/mindmend-guardian.git
 cd mindmend-guardian
-
-# Set up Python virtual environment
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies (when requirements.txt exists)
-pip install -r requirements.txt
-
-# Initialize whisper.cpp submodule
-git submodule update --init --recursive
-
-# Run test script
-python tools/test_tts.py
-
-# Or run main listener script
-python guardian/mindmend_guardian.py
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -e ".[dev,api]"
 ```
 
-**Optional:** Run GitHub Actions locally using [act](https://github.com/nektos/act) for pre-submission validation.
-
-## How to Run Tests/Build/Dev Server
+Common commands:
 
 ```bash
-# Run all tests quietly
-pytest -q
-
-# Run specific test markers (e.g., skip hardware tests)
-pytest -m "not hardware"
-
-# Run hardware tests (recommended on Raspberry Pi)
-pytest -m hardware
+pytest --cov=guardian --cov-report=term-missing
+ruff check guardian tests
+ruff format --check guardian tests
+python -m guardian.demo --json
+python -m guardian.dashboard   # requires [simulator] extra
 ```
 
-**Testing notes:**
-- Lightweight unit tests run on CI
-- Manual/hardware tests recommended for Raspberry Pi
-- Use `@pytest.mark.hardware` for tests requiring physical hardware
-- Test voice activation, threat detection, and geofencing thoroughly
+See [`SETUP.md`](../SETUP.md) and [`CONTRIBUTING.md`](../CONTRIBUTING.md) for full guidance.
 
 ## Architecture & Module Notes
 
+### Core rules engine
+`guardian/core.py` — import-safe risk evaluation and audit hashing.
+
 ### Luna Safety Core
-Real-time threat/grooming analysis engine. Modular separation includes:
+Modular Flask backend under `guardian/luna/`:
 
-- **Listener** — Wake-word detection
-- **VAD** — Voice activity detection (Silero)
-- **Recognition** — Speech-to-text processing
-- **Threat Classifier** — Safety analysis
-- **Notifier** — Parent alert system
-- **Geofence** — Location-based safety
+- **auth** — JWT bearer verification and bootstrap token issuance
+- **validation** — request payload validation
+- **safety** — chat scanning and toxicity helpers
+- **geofence** — location bounds checks
+- **alerts** — optional Firebase delivery (disabled without credentials)
 
-### Low-Power Considerations
-- Use blocking I/O where possible
-- Efficient VAD to minimize CPU usage
-- Reduce model sizes for edge deployment
-- Target <1W power consumption in idle mode
-- Optimize for Raspberry Pi constraints
+### Demo surfaces
+- `python -m guardian.demo` — synthetic CLI demo
+- `python -m guardian.dashboard` — optional Streamlit dashboard
 
-### Do-Not-Touch Areas
-Request permission before modifying:
-- `/models/` — Model storage
-- `/weights/` — Model weights
-- `/data/` — Training/test data
-- `/test-audio/` — Audio samples
-- `.env` — Environment configuration
-- Files matching `*.ckpt` or `*.bin`
+### Experimental subprojects
+- `ani-2027/` — experimental Tauri/React UI prototype (not required for core CI)
+- `perrien-simulator/` — optional simulator dashboard
+
+These subprojects inherit the repository MIT license but are not production-ready.
 
 ## Ethics & False-Positive Guidance
 
-**Core Principles:**
 - Minimize false positives to maintain trust
-- Design compassionate, non-alarming responses
+- Design compassionate, non-alarmist responses
 - Human-in-the-loop for serious alerts
-- Provide helpful resources, not just warnings
-- Consider emotional impact on children and families
-- Respect privacy — no data leaves the device
-
-**Testing Ethical Scenarios:**
-- Test edge cases that might trigger false alarms
-- Verify appropriate responses to genuine threats
-- Ensure alert messages are age-appropriate
-- Document reasoning for threat classification thresholds
+- Respect privacy — default audit output uses hashes, not raw chat text
 
 ## Security & Privacy
 
-- All processing happens locally on-device
-- No internet connectivity required for core features
-- No telemetry, tracking, or data collection
-- Parent alerts are local (no cloud services)
-- Report security issues via GitHub Security Advisories
+- Safe Luna defaults: bind to `127.0.0.1`, debug off, JWT auth on by default
+- Report security issues privately via [`SECURITY.md`](../SECURITY.md)
+- Follow the [Code of Conduct](../CODE_OF_CONDUCT.md)
 
----
-
-**Questions?** Open an issue or see [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
-
-<!-- Last updated: 2026-01-27 -->
-# Copilot & Contributor Instructions — MindMend Guardian
-
-## Project overview
-100% offline guardian AI for kids/teens:
-- Local wake-word listener ("hey mindmend")
-- Gentle TTS conversation
-- Luna Safety Core for threat/grooming detection, geofencing, parent alerts
-- No cloud, no telemetry
-- Compassionate responses (e.g., 988 resources)
-100% offline guardian AI for kids/teens: local wake-word listener ("hey mindmend"), gentle TTS conversation, Luna Safety Core for threat/grooming detection, geofencing, parent alerts. No cloud, no telemetry, compassionate responses (e.g., 988 resources).
-
-## Tech stack
-Python 3, whisper.cpp (submodule), optional llama.cpp, Silero VAD/threading for low-power listening, pytest, GitHub Actions CI.
-
-## Rules
-No cloud/telemetry/external APIs. Never commit .env, model weights (*.ckpt/*.bin/*.pth), personal audio. Add tests for voice/threat/geofence. Prioritize low-power (<1W idle on RPi Zero). Ethical: minimize false positives, gentle/non-alarmist alerts.
-
-## Setup
-Clone → venv → pip install -r requirements.txt → git submodule update --init --recursive → run tts_test.py or main listener.
-Clone → venv → install dependencies (if available) → git submodule update --init --recursive → run tts_test.py or main listener.
-
-## Do-not-touch
-/models/* /weights/* /data/* /test-audio/* .env large binaries.
-
-## Ethics
-Human-in-loop for high alerts; supportive flows.
+**Questions?** See [`SUPPORT.md`](../SUPPORT.md) or open a structured GitHub issue.

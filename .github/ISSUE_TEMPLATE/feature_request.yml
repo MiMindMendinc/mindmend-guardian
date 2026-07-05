@@ -1,0 +1,57 @@
+name: Feature request
+description: Propose an improvement aligned with privacy-first youth safety goals
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Feature requests should respect MindMend Guardian's prototype boundaries:
+        privacy-first, local-first where possible, and human-in-the-loop by design.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What user or contributor pain does this address?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the behavior, API, or documentation change you want.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other approaches you evaluated.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Primary area
+      options:
+        - Core rules engine
+        - Luna API / backend
+        - Demo / dashboard
+        - Voice runtime
+        - Documentation
+        - CI / developer experience
+        - Other
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope alignment
+      options:
+        - label: This stays within prototype / portfolio scope (no clinical or compliance claims)
+          required: true
+        - label: This preserves privacy-first and human-in-the-loop design
+          required: true

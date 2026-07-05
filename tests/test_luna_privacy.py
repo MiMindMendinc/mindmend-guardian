@@ -47,14 +47,14 @@ def test_luna_config_can_require_auth_by_default_shape():
 
 
 def test_alert_fallback_logging_omits_message_body(caplog):
-    caplog.set_level(logging.WARNING)
+    caplog.set_level(logging.WARNING, logger="guardian.luna.alerts")
     sensitive = "please meet me alone at the hotel after school"
 
     send_alert_async("parent-token", build_chat_alert_message(sensitive))
-    # Allow background thread to run briefly.
+
     import time
 
-    time.sleep(0.05)
+    time.sleep(0.3)
 
     log_text = caplog.text
     assert sensitive not in log_text

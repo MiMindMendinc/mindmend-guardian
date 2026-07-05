@@ -40,8 +40,8 @@ jobs:
       - name: Dependency audit
         run: pip-audit -r <(pip freeze)
 
-      - name: Run tests
-        run: pytest
+      - name: Run tests with coverage
+        run: pytest --cov=guardian --cov-report=term-missing
 
       - name: Verify local demo command
         run: python -m guardian.demo --json

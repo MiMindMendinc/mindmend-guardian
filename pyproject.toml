@@ -4,9 +4,20 @@ version = "0.3.0"
 description = "Privacy-first youth safety and wellness support prototype from Michigan MindMend Inc."
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "MIT" }
+license = { file = "LICENSE" }
 authors = [
   { name = "Lyle Perrien II", email = "michiganmindmendinc@proton.me" }
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Security",
+  "Typing :: Typed",
 ]
 keywords = [
   "ai-safety",
@@ -82,6 +93,9 @@ mindmend-demo = "guardian.demo.cli:main"
 Homepage = "https://github.com/MiMindMendinc/mindmend-guardian"
 Repository = "https://github.com/MiMindMendinc/mindmend-guardian"
 Documentation = "https://github.com/MiMindMendinc/mindmend-guardian/tree/main/docs"
+Changelog = "https://github.com/MiMindMendinc/mindmend-guardian/blob/main/CHANGELOG.md"
+"Bug Tracker" = "https://github.com/MiMindMendinc/mindmend-guardian/issues"
+"Source Code" = "https://github.com/MiMindMendinc/mindmend-guardian"
 
 [tool.setuptools.packages.find]
 include = ["guardian*"]
@@ -90,6 +104,20 @@ include = ["guardian*"]
 testpaths = ["tests"]
 pythonpath = ["."]
 addopts = "-q"
+
+[tool.coverage.run]
+source = ["guardian"]
+branch = true
+omit = [
+  "guardian/mindmend_guardian.py",
+  "guardian/dashboard/*",
+  "guardian/luna/luna_safety_core.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
+fail_under = 70
 
 [tool.ruff]
 target-version = "py311"
