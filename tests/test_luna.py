@@ -2,7 +2,6 @@
 
 import jwt
 import pytest
-
 from guardian.luna.app import create_app
 from guardian.luna.config import LunaConfig, load_config
 from guardian.luna.safety import build_chat_alert_message, scan_message, toxicity_score
@@ -11,7 +10,7 @@ from guardian.luna.safety import build_chat_alert_message, scan_message, toxicit
 @pytest.fixture
 def luna_config() -> LunaConfig:
     return LunaConfig(
-        secret_key="test-secret-key",
+        secret_key="x" * 32,
         firebase_credentials_path=None,
         safe_lat=42.3314,
         safe_lon=-83.0458,
