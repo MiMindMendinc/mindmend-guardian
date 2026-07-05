@@ -17,7 +17,7 @@ from .core import (
     supportive_reply,
 )
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 __author__ = "Michigan MindMend Inc."
 
 __all__ = [

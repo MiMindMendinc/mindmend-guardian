@@ -9,11 +9,12 @@ see a clear testable safety layer instead of only a hardware-dependent demo scri
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from datetime import datetime, timezone
 import hashlib
 import re
-from typing import Iterable, Literal
+from collections.abc import Iterable
+from dataclasses import dataclass, field
+from datetime import UTC, datetime
+from typing import Literal
 
 RiskLevel = Literal["low", "medium", "high", "crisis"]
 
@@ -53,7 +54,7 @@ class GuardianAssessment:
     should_escalate: bool
     matched_categories: tuple[str, ...] = field(default_factory=tuple)
     input_hash: str = ""
-    timestamp: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    timestamp: str = field(default_factory=lambda: datetime.now(UTC).isoformat())
 
 
 def _matches(text: str, patterns: Iterable[re.Pattern[str]]) -> bool:

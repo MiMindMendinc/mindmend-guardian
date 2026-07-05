@@ -2,13 +2,12 @@
 #
 # Recommended install paths:
 #   pip install -e .                 # import-safe core helpers only
-#   pip install -e ".[dev]"          # core + pytest
-#   pip install -e ".[luna,dev]"     # Luna backend + tests
+#   pip install -e ".[dev]"          # core + pytest + ruff + pip-audit
+#   pip install -e ".[api,dev]"      # Luna/API backend + tests
 #   pip install -e ".[voice]"        # voice runtime extras
-#   pip install -e ".[simulator]"    # Perrien simulator extras
+#   pip install -e ".[simulator]"    # dashboard + Perrien simulator extras
 #   pip install -e ".[all]"          # everything documented in SETUP.md
 #
-# This file remains for backward compatibility with older setup docs.
 # Runtime dependency metadata lives in pyproject.toml optional extras.
 
 -e ".[dev]"
