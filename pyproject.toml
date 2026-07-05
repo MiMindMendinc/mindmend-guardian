@@ -16,10 +16,57 @@ keywords = [
   "mental-wellness",
   "local-first"
 ]
+dependencies = []
+
+[project.optional-dependencies]
+simulator = [
+  "numpy>=1.26,<3",
+  "pandas>=2.1,<4",
+  "plotly>=5.18",
+  "streamlit>=1.30",
+]
+voice = [
+  "numpy>=1.26,<3",
+  "onnxruntime>=1.16",
+  "psutil>=5.9",
+  "pyaudio>=0.2.14",
+  "pyttsx3>=2.90",
+  "torch>=2.1",
+]
+luna = [
+  "Flask>=3.0,<4",
+  "PyJWT>=2.12",
+  "firebase-admin>=6.0",
+  "spacy>=3.7,<4",
+  "spacytextblob>=4.0",
+]
+dev = [
+  "pytest>=8.0",
+]
+all = [
+  "numpy>=1.26,<3",
+  "pandas>=2.1,<4",
+  "plotly>=5.18",
+  "streamlit>=1.30",
+  "onnxruntime>=1.16",
+  "psutil>=5.9",
+  "pyaudio>=0.2.14",
+  "pyttsx3>=2.90",
+  "torch>=2.1",
+  "Flask>=3.0,<4",
+  "PyJWT>=2.12",
+  "firebase-admin>=6.0",
+  "spacy>=3.7,<4",
+  "spacytextblob>=4.0",
+  "pytest>=8.0",
+]
 
 [project.urls]
 Homepage = "https://github.com/MiMindMendinc/mindmend-guardian"
 Repository = "https://github.com/MiMindMendinc/mindmend-guardian"
+
+[tool.setuptools.packages.find]
+include = ["guardian*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

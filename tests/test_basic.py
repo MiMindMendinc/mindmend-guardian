@@ -46,15 +46,15 @@ def test_package_structure():
 
 
 def test_requirements_file():
-    """Test that requirements.txt exists and is readable"""
+    """Test that requirements.txt exists and points to project metadata."""
     assert os.path.exists('requirements.txt'), "requirements.txt is missing"
-    
+
     with open('requirements.txt', 'r') as f:
         content = f.read()
         assert len(content) > 0, "requirements.txt is empty"
-        assert 'torch' in content, "torch not in requirements.txt"
-        assert 'streamlit' in content, "streamlit not in requirements.txt"
-    
+        assert 'pyproject.toml' in content or '-e .' in content, "requirements.txt should reference editable install"
+
+    assert os.path.exists('pyproject.toml'), "pyproject.toml is missing"
     print("✓ requirements.txt: Valid")
 
 

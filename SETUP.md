@@ -4,7 +4,7 @@
 
 ### Prerequisites
 
-- Python 3.8 or higher
+- Python 3.10 or higher (CI tests Python 3.11)
 - Git
 - (Optional) CUDA-capable GPU for enhanced performance
 
@@ -22,9 +22,18 @@
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
-3. **Install core dependencies:**
+3. **Install dependencies:**
    ```bash
-   pip install -r requirements.txt
+   pip install -e ".[dev]"
+   ```
+
+   Component-specific extras:
+
+   ```bash
+   pip install -e ".[luna,dev]"      # Luna backend
+   pip install -e ".[voice]"         # voice runtime
+   pip install -e ".[simulator]"     # Perrien simulator
+   pip install -e ".[all]"           # everything documented below
    ```
 
 4. **Test the installation:**
@@ -65,21 +74,28 @@ python guardian/mindmend_guardian.py
 
 ### Luna Safety Core
 
-Luna requires additional dependencies for threat detection and alerts:
+Luna reads configuration from environment variables. Copy `.env.example` to `.env`
+and set at least `LUNA_SECRET_KEY` before starting the server.
 
 ```bash
-pip install flask PyJWT firebase-admin spacy spacytextblob
+pip install -e ".[luna,dev]"
 python -m spacy download en_core_web_sm
 ```
 
 **Run Luna API:**
 ```bash
+export LUNA_SECRET_KEY="replace-with-a-long-random-secret"
 python guardian/luna/luna_safety_core.py
 ```
+
+For local development you can optionally protect token issuance with
+`LUNA_AUTH_BOOTSTRAP_TOKEN`. Safety endpoints can require JWT bearer auth when
+`LUNA_REQUIRE_AUTH=true`.
 
 **Run Luna tests:**
 ```bash
 python guardian/luna/luna_safety_core.py --test
+pytest tests/test_luna.py
 ```
 
 ### Perrien Simulator
@@ -124,7 +140,7 @@ python -m py_compile perrien-simulator/app.py
 For low-power deployment on Raspberry Pi:
 
 1. Use Raspberry Pi OS (64-bit recommended)
-2. Install Python 3.8+: `sudo apt install python3 python3-pip python3-venv`
+2. Install Python 3.10+: `sudo apt install python3 python3-pip python3-venv`
 3. Install audio dependencies: `sudo apt install portaudio19-dev python3-pyaudio`
 4. Follow the basic installation steps above
 5. Consider using lighter model variants for better performance
