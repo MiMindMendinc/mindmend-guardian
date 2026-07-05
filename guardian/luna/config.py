@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import os
+from dataclasses import dataclass
 
 
 def _env_bool(name: str, default: bool = False) -> bool:
@@ -37,10 +37,11 @@ def load_config() -> LunaConfig:
 
     secret_key = os.environ.get("LUNA_SECRET_KEY", "").strip()
     if not secret_key:
-        raise ValueError(
-            "LUNA_SECRET_KEY is required. Set it in your environment or .env file."
-        )
+        raise ValueError("LUNA_SECRET_KEY is required. Set it in your environment or .env file.")
+    if len(secret_key) < 32:
+        raise ValueError("LUNA_SECRET_KEY must be at least 32 characters for HS256 signing.")
 
+    # Safe defaults: local bind, debug off, auth optional unless explicitly enabled.
     firebase_path = os.environ.get("LUNA_FIREBASE_CREDENTIALS", "").strip() or None
 
     return LunaConfig(

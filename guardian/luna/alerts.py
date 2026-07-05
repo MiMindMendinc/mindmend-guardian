@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import logging
+from collections.abc import Callable
 from threading import Thread
-from typing import Callable
 
 logger = logging.getLogger(__name__)
 
@@ -51,13 +51,12 @@ def send_alert_async(
             return
 
         try:
-            import firebase_admin
             from firebase_admin import messaging
         except ImportError:
             logger.warning("Firebase unavailable. Alert suppressed: %s", alert_msg)
             return
 
-        if not firebase_admin.apps:
+        if not _firebase_initialized:
             logger.warning("Firebase unavailable. Alert suppressed: %s", alert_msg)
             return
 
