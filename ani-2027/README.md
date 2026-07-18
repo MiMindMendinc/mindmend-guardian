@@ -175,6 +175,6 @@ The UI, localStorage memory/projects, Tauri command wiring, Ollama chat path, Ol
 ## Built By
 
 Michigan MindMend Inc.  
-Owosso, Michigan
+Michigan
 
 Privacy-first, offline-capable AI tools for families, builders, nonprofits, and communities.

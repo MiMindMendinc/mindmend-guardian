@@ -80,7 +80,7 @@ We use careful language: **privacy-first, local-first, clinician-informed, safet
 
 **Lyle Perrien II**  
 Founder, Michigan MindMend Inc.  
-Owosso, Michigan  
+Michigan  
 Email: michiganmindmendinc@proton.me  
 X: [@p_perrien](https://x.com/p_perrien)
 

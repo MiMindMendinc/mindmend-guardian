@@ -222,7 +222,7 @@ Report security concerns privately following [`SECURITY.md`](SECURITY.md). Do no
 
 **Lyle Perrien II**  
 Founder, **Michigan MindMend Inc.**  
-Owosso, Michigan
+Michigan
 
 Building privacy-first, offline-capable AI safety tools for kids, families, and communities.
 
