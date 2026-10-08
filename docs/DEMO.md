@@ -88,10 +88,11 @@ python -m guardian.dashboard
 # Take screenshots and save to docs/assets/
 ```
 
-Placeholder paths referenced by the README:
+Assets referenced by the README (captured locally with synthetic samples only):
 
-- `docs/assets/cli-demo-placeholder.png`
-- `docs/assets/dashboard-demo-placeholder.png`
+- `docs/assets/dashboard-medium.png`: "anxious and overwhelmed" sample, MEDIUM risk
+- `docs/assets/dashboard-high.png`: "unsafe at home" sample, HIGH risk, human review suggested
+- `docs/assets/cli-demo-sample.txt`: full `python -m guardian.demo` output
 
 ## Demo boundaries
 

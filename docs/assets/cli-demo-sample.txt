@@ -1,0 +1,58 @@
+MindMend Guardian — Local Demo (synthetic sample only)
+==========================================================
+Sample text: I had a normal day and want to journal about soccer practice.
+Risk level: low
+Matched signals: none
+Human review recommended: no
+Audit hash: d795e7e1c3ac6c85…
+
+Supportive response:
+I'm here with you. Take it one step at a time, and tell me what's on your mind.
+
+Privacy note:
+Raw message text is not stored in audit output by default. Only a SHA-256 hash and risk metadata are recorded for review workflows.
+
+
+MindMend Guardian — Local Demo (synthetic sample only)
+==========================================================
+Sample text: I feel anxious and overwhelmed about school today.
+Risk level: medium
+Matched signals: emotional_distress
+Human review recommended: no
+Audit hash: cb8a2b4855cd7615…
+
+Supportive response:
+I'm sorry this feels heavy right now. Your feelings are real, and you are not alone. Take one slow breath in and one slow breath out. Reach out to a trusted adult if this feels too heavy to hold alone.
+
+Privacy note:
+Raw message text is not stored in audit output by default. Only a SHA-256 hash and risk metadata are recorded for review workflows.
+
+
+MindMend Guardian — Local Demo (synthetic sample only)
+==========================================================
+Sample text: I feel unsafe at home and I am scared to go home.
+Risk level: high
+Matched signals: high_risk_safety_language
+Human review recommended: yes
+Audit hash: 766effae684e8edb…
+
+Supportive response:
+That sounds serious, and you should not have to handle it alone. Please tell a trusted adult, caregiver, counselor, or local emergency contact as soon as you can. I can stay with you for a grounding step, but a real person needs to know.
+
+Privacy note:
+Raw message text is not stored in audit output by default. Only a SHA-256 hash and risk metadata are recorded for review workflows.
+
+
+MindMend Guardian — Local Demo (synthetic sample only)
+==========================================================
+Sample text: I want to die and I need help right now.
+Risk level: crisis
+Matched signals: crisis_language
+Human review recommended: yes
+Audit hash: 1fdfe494c5931ee2…
+
+Supportive response:
+I'm really glad you said something. You deserve immediate support from a real person. Please move closer to a trusted adult or call/text 988 now. If you or someone else may be in immediate danger, contact emergency services. In the United States, call or text 988 for the Suicide & Crisis Lifeline.
+
+Privacy note:
+Raw message text is not stored in audit output by default. Only a SHA-256 hash and risk metadata are recorded for review workflows.
