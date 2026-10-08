@@ -177,7 +177,7 @@ See [`docs/ROADMAP.md`](docs/ROADMAP.md). Near-term focus:
 - parent/guardian review workflow mock
 - encrypted local audit log example
 - deployment notes for edge devices
-- demo screenshots and short walkthrough video
+- short walkthrough video (dashboard screenshots added)
 
 ---
 
@@ -234,14 +234,25 @@ MIT
 
 ## Visual preview
 
-> Screenshot and demo GIF placeholders — capture after running the dashboard locally.
+Real captures of the local Streamlit dashboard (`python -m guardian.dashboard`) running on `127.0.0.1` with the built-in synthetic sample messages only. No real user, child, or family data; no cloud services.
 
-| CLI demo | Dashboard demo |
-|----------|----------------|
-| `docs/assets/cli-demo-placeholder.png` | `docs/assets/dashboard-demo-placeholder.png` |
+| Medium risk: support only | High risk: human review and escalation |
+|---------------------------|----------------------------------------|
+| ![Dashboard showing a synthetic "anxious and overwhelmed" sample rated MEDIUM, with no human review needed](docs/assets/dashboard-medium.png) | ![Dashboard showing a synthetic "unsafe at home" sample rated HIGH, with human review and escalation suggested](docs/assets/dashboard-high.png) |
+
+CLI demo output (`python -m guardian.demo`, excerpt; full output in [`docs/assets/cli-demo-sample.txt`](docs/assets/cli-demo-sample.txt)):
+
+```text
+Sample text: I feel unsafe at home and I am scared to go home.
+Risk level: high
+Matched signals: high_risk_safety_language
+Human review recommended: yes
+```
+
+Captured 8 October 2026 from `main` with Streamlit 1.65.0 in headless Chrome (1280×900). Rule-based pattern matching on fixed samples, not clinical validation. To reproduce:
 
 ```bash
-# Suggested capture commands (run locally)
+pip install -e ".[simulator]"
 python -m guardian.demo > docs/assets/cli-demo-sample.txt
 python -m guardian.dashboard
 ```

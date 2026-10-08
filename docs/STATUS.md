@@ -47,7 +47,8 @@ MindMend Guardian does not currently claim:
 - [x] docs/THREAT_MODEL.md present and aligned
 - [x] docs/PRIVACY_AND_SAFETY.md present and aligned
 - [ ] local encrypted logging example documented and implemented
-- [ ] screenshots or demo GIF added
+- [x] dashboard screenshots added (synthetic samples only)
+- [ ] demo GIF added
 - [x] architecture diagram added
 - [ ] Raspberry Pi / edge deployment notes expanded
 - [x] README claims checked against code

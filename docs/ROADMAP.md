@@ -19,7 +19,8 @@ MindMend Guardian is being hardened from a mission-driven prototype into a recru
 - [ ] Parent/guardian review workflow mock
 - [ ] Encrypted local audit log example (SQLite)
 - [ ] Sensitivity configuration file (YAML/TOML)
-- [ ] Demo screenshots and short walkthrough GIF
+- [x] Demo dashboard screenshots (synthetic samples)
+- [ ] Short walkthrough GIF
 - [ ] Docker and Raspberry Pi deployment notes
 
 ## Safety hardening
