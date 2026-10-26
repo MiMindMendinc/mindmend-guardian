@@ -81,7 +81,6 @@ We use careful language: **privacy-first, local-first, clinician-informed, safet
 **Lyle Perrien II**  
 Founder, Michigan MindMend Inc.  
 Michigan  
-Email: michiganmindmendinc@proton.me  
 X: [@p_perrien](https://x.com/p_perrien)
 
 **Helpful AI should protect people without harvesting their data.**

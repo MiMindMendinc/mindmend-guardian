@@ -17,12 +17,9 @@ Security fixes are prioritized for the active development line on `main`.
 Please do **not** open a public issue for security problems, secrets, private
 data exposure, child-safety concerns, or exploit details.
 
-Report concerns privately using one of these channels:
-
-1. **Email (preferred):** [michiganmindmendinc@proton.me](mailto:michiganmindmendinc@proton.me)
-2. **GitHub Private Security Advisories:** use the
-   [Security tab](https://github.com/MiMindMendinc/mindmend-guardian/security/advisories/new)
-   on this repository when available
+Report concerns privately through **GitHub private vulnerability reporting**:
+use the [Security tab](https://github.com/MiMindMendinc/mindmend-guardian/security/advisories/new)
+on this repository.
 
 Please include:
 
