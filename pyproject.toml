@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 license = { file = "LICENSE" }
 authors = [
-  { name = "Lyle Perrien II", email = "michiganmindmendinc@proton.me" }
+  { name = "Lyle Perrien II", email = "243690314+MiMindMendinc@users.noreply.github.com" }
 ]
 classifiers = [
   "Development Status :: 3 - Alpha",
