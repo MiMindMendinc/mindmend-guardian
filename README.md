@@ -2,14 +2,14 @@
 
 **Privacy-first, local-first AI safety prototype for youth and family wellness.**
 
-MindMend Guardian is a portfolio-grade engineering prototype from **Michigan MindMend Inc.** It demonstrates how families can explore youth safety workflows with risk-signal detection, calm support language, privacy-preserving audit events, and human-in-the-loop review — without default cloud dependency or unsupervised automation.
-
 [![Python](https://img.shields.io/badge/Python-3.11-blue)](pyproject.toml)
 [![CI](https://github.com/MiMindMendinc/mindmend-guardian/actions/workflows/ci.yml/badge.svg)](https://github.com/MiMindMendinc/mindmend-guardian/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Prototype-blue)](#project-status)
 
-> Built by Michigan MindMend Inc. as a privacy-first responsible AI safety prototype.
+MindMend Guardian is a portfolio-grade engineering prototype from **Michigan MindMend Inc.** It demonstrates how families can explore youth safety workflows with risk-signal detection, calm support language, privacy-preserving audit events, and human-in-the-loop review — without default cloud dependency or unsupervised automation. The core rules engine (`guardian/core.py`) has no third-party runtime dependencies, and every demo runs on built-in synthetic samples.
+
+> If someone may be in immediate danger, contact emergency services. In the United States, call or text **988** for the Suicide & Crisis Lifeline.
 
 ---
 
@@ -17,7 +17,7 @@ MindMend Guardian is a portfolio-grade engineering prototype from **Michigan Min
 
 - A **local-first safety layer** with import-safe core helpers in `guardian/core.py`
 - A **runnable CLI demo** (`python -m guardian.demo`) using synthetic sample text only
-- An optional **Streamlit dashboard demo** for recruiters, sponsors, and contributors
+- An optional **Streamlit dashboard demo** for reviewers and contributors
 - A modular **Luna API backend** for message/location safety checks (prototype)
 - A **voice runtime sketch** for edge deployment experiments (hardware-dependent)
 - Honest documentation for privacy, threat modeling, and responsible use
@@ -32,7 +32,26 @@ MindMend Guardian does **not** claim:
 - production readiness for unsupervised child safety
 - replacement for parents, guardians, clinicians, or emergency services
 
-If someone may be in immediate danger, contact emergency services. In the United States, call or text **988** for the Suicide & Crisis Lifeline.
+---
+
+## Visual preview
+
+Real captures of the local Streamlit dashboard (`python -m guardian.dashboard`) running on `127.0.0.1` with the built-in synthetic sample messages only. No real user, child, or family data; no cloud services.
+
+| Medium risk: support only | High risk: human review and escalation |
+|---------------------------|----------------------------------------|
+| ![Dashboard showing a synthetic "anxious and overwhelmed" sample rated MEDIUM, with no human review needed](docs/assets/dashboard-medium.png) | ![Dashboard showing a synthetic "unsafe at home" sample rated HIGH, with human review and escalation suggested](docs/assets/dashboard-high.png) |
+
+CLI demo output (`python -m guardian.demo`, excerpt; full output in [`docs/assets/cli-demo-sample.txt`](docs/assets/cli-demo-sample.txt)):
+
+```text
+Sample text: I feel unsafe at home and I am scared to go home.
+Risk level: high
+Matched signals: high_risk_safety_language
+Human review recommended: yes
+```
+
+Captured 8 October 2026 from `main` with Streamlit 1.65.0 in headless Chrome (1280×900). Rule-based pattern matching on fixed samples, not clinical validation.
 
 ---
 
@@ -64,6 +83,18 @@ flowchart TD
 
 See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for module boundaries and design notes.
 
+## Tech stack
+
+From [`pyproject.toml`](pyproject.toml):
+
+| Part | Stack |
+| --- | --- |
+| Core rules engine and CLI demo | Python 3.11+, standard library only |
+| Dashboard demo (`[simulator]` extra) | Streamlit, pandas, Plotly, NumPy |
+| Luna API (`[api]` / `[luna]` extra) | Flask 3, PyJWT, spaCy + spacytextblob, firebase-admin |
+| Voice runtime sketch (`[voice]` extra) | ONNX Runtime, PyTorch, PyAudio, pyttsx3 |
+| Dev and CI (`[dev]` extra) | pytest + pytest-cov, ruff, pip-audit, GitHub Actions |
+
 ---
 
 ## Quickstart
@@ -77,6 +108,8 @@ python -m pip install --upgrade pip
 pip install -e ".[dev]"
 pytest
 ```
+
+Full installation guide: [`SETUP.md`](SETUP.md).
 
 ## Run the local demo
 
@@ -110,9 +143,7 @@ python -m guardian.dashboard
 
 Uses synthetic sample messages only. No Firebase or external APIs required.
 
----
-
-## Run tests
+## Run tests and lint
 
 ```bash
 pip install -e ".[dev,api]"
@@ -132,8 +163,6 @@ ruff format --check guardian tests
 - **Honest scope** — prototype status is visible in docs and README
 
 Details: [`docs/PRIVACY_AND_SAFETY.md`](docs/PRIVACY_AND_SAFETY.md)
-
----
 
 ## Security model summary
 
@@ -167,8 +196,6 @@ Still evolving:
 
 Details: [`docs/STATUS.md`](docs/STATUS.md)
 
----
-
 ## Roadmap
 
 See [`docs/ROADMAP.md`](docs/ROADMAP.md). Near-term focus:
@@ -195,8 +222,6 @@ See [`docs/ROADMAP.md`](docs/ROADMAP.md). Near-term focus:
 | [`CHANGELOG.md`](CHANGELOG.md) | Version history |
 | [`SETUP.md`](SETUP.md) | Full installation guide |
 
----
-
 ## Contributing
 
 We welcome thoughtful contributions that respect privacy-first design and
@@ -206,11 +231,6 @@ human-in-the-loop safety boundaries.
 - Follow our [`Code of Conduct`](CODE_OF_CONDUCT.md)
 - Use [issue templates](https://github.com/MiMindMendinc/mindmend-guardian/issues/new/choose) for bugs and features
 - See [`SUPPORT.md`](SUPPORT.md) for help routing
-
-This project is released under the [MIT License](LICENSE). See [`CHANGELOG.md`](CHANGELOG.md)
-for version history.
-
----
 
 ## Responsible disclosure
 
@@ -228,31 +248,4 @@ Building privacy-first, offline-capable AI safety tools for kids, families, and 
 
 ## License
 
-MIT
-
----
-
-## Visual preview
-
-Real captures of the local Streamlit dashboard (`python -m guardian.dashboard`) running on `127.0.0.1` with the built-in synthetic sample messages only. No real user, child, or family data; no cloud services.
-
-| Medium risk: support only | High risk: human review and escalation |
-|---------------------------|----------------------------------------|
-| ![Dashboard showing a synthetic "anxious and overwhelmed" sample rated MEDIUM, with no human review needed](docs/assets/dashboard-medium.png) | ![Dashboard showing a synthetic "unsafe at home" sample rated HIGH, with human review and escalation suggested](docs/assets/dashboard-high.png) |
-
-CLI demo output (`python -m guardian.demo`, excerpt; full output in [`docs/assets/cli-demo-sample.txt`](docs/assets/cli-demo-sample.txt)):
-
-```text
-Sample text: I feel unsafe at home and I am scared to go home.
-Risk level: high
-Matched signals: high_risk_safety_language
-Human review recommended: yes
-```
-
-Captured 8 October 2026 from `main` with Streamlit 1.65.0 in headless Chrome (1280×900). Rule-based pattern matching on fixed samples, not clinical validation. To reproduce:
-
-```bash
-pip install -e ".[simulator]"
-python -m guardian.demo > docs/assets/cli-demo-sample.txt
-python -m guardian.dashboard
-```
+Released under the [MIT License](LICENSE).
