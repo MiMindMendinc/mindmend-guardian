@@ -5,9 +5,8 @@
 [![Python](https://img.shields.io/badge/Python-3.11-blue)](pyproject.toml)
 [![CI](https://github.com/MiMindMendinc/mindmend-guardian/actions/workflows/ci.yml/badge.svg)](https://github.com/MiMindMendinc/mindmend-guardian/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Prototype-blue)](#project-status)
 
-MindMend Guardian is a portfolio-grade engineering prototype from **Michigan MindMend Inc.** It demonstrates how families can explore youth safety workflows with risk-signal detection, calm support language, privacy-preserving audit events, and human-in-the-loop review — without default cloud dependency or unsupervised automation. The core rules engine (`guardian/core.py`) has no third-party runtime dependencies, and every demo runs on built-in synthetic samples.
+MindMend Guardian is an engineering prototype from **Michigan MindMend Inc.** It demonstrates how families can explore youth safety workflows with risk-signal detection, calm support language, privacy-preserving audit events, and human-in-the-loop review — without default cloud dependency or unsupervised automation. The core rules engine (`guardian/core.py`) has no third-party runtime dependencies, and every demo runs on built-in synthetic samples.
 
 > If someone may be in immediate danger, contact emergency services. In the United States, call or text **988** for the Suicide & Crisis Lifeline.
 
@@ -17,20 +16,10 @@ MindMend Guardian is a portfolio-grade engineering prototype from **Michigan Min
 
 - A **local-first safety layer** with import-safe core helpers in `guardian/core.py`
 - A **runnable CLI demo** (`python -m guardian.demo`) using synthetic sample text only
-- An optional **Streamlit dashboard demo** for reviewers and contributors
-- A modular **Luna API backend** for message/location safety checks (prototype)
+- An optional **Streamlit dashboard demo**
+- A modular **Luna API backend** for message/location safety checks
 - A **voice runtime sketch** for edge deployment experiments (hardware-dependent)
-- Honest documentation for privacy, threat modeling, and responsible use
-
-## What this is not
-
-MindMend Guardian does **not** claim:
-
-- medical or clinical validation
-- guaranteed detection of abuse, grooming, bullying, or self-harm
-- HIPAA / COPPA compliance out of the box
-- production readiness for unsupervised child safety
-- replacement for parents, guardians, clinicians, or emergency services
+- Documentation for privacy, threat modeling, and responsible use
 
 ---
 
@@ -51,7 +40,7 @@ Matched signals: high_risk_safety_language
 Human review recommended: yes
 ```
 
-Captured 8 October 2026 from `main` with Streamlit 1.65.0 in headless Chrome (1280×900). Rule-based pattern matching on fixed samples, not clinical validation.
+Captured 8 October 2026 from `main` with Streamlit 1.65.0 in headless Chrome (1280×900).
 
 ---
 
@@ -82,6 +71,18 @@ flowchart TD
 ```
 
 See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for module boundaries and design notes.
+
+## Repository layout
+
+| Path | What it is |
+| --- | --- |
+| `guardian/` | The project itself: `core.py` rules engine, `demo/` CLI, `dashboard/` Streamlit demo, `luna/` API, and the `mindmend_guardian.py` voice runtime sketch |
+| `tests/` | pytest suite run by CI |
+| `docs/` | Architecture, API, security configuration, privacy, threat model, status, roadmap, and screenshots |
+| `tools/` | Helper scripts |
+| `ani-2027/` | Separate early prototype: a Tauri v2 + React desktop app for local Ollama chat (its own [README](ani-2027/README.md)). Not part of the Guardian safety layer, not covered by this repo's CI, and not yet build-verified per its README |
+| `perrien-simulator/` | Early Streamlit/Dash stub that plots an uploaded CSV. Not part of the safety layer; its "Use GPU" checkbox only changes a label, and `app_dash.py` is an unfinished skeleton |
+| `models/` | Empty placeholder (`.gitkeep` only); no model files are committed |
 
 ## Tech stack
 
@@ -160,7 +161,6 @@ ruff format --check guardian tests
 - **Data minimization** — audit events store hashes, not raw text by default
 - **Human-in-the-loop** — AI suggests; trusted adults decide
 - **Supportive language** — calm framing instead of fear-based alerts
-- **Honest scope** — prototype status is visible in docs and README
 
 Details: [`docs/PRIVACY_AND_SAFETY.md`](docs/PRIVACY_AND_SAFETY.md)
 
@@ -176,9 +176,9 @@ Details: [`docs/SECURITY_CONFIG.md`](docs/SECURITY_CONFIG.md) · [`docs/THREAT_M
 
 ---
 
-## Project status
+## Status and limits
 
-**Active prototype / portfolio project (v0.3.0).**
+**Prototype, v0.3.0.** Detection is rule-based pattern matching, not clinical validation. It is not guaranteed to catch abuse, grooming, bullying, or self-harm; it is not HIPAA/COPPA compliant out of the box; and it is not ready for unsupervised child-safety use or a replacement for parents, guardians, clinicians, or emergency services.
 
 Verified today:
 
