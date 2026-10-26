@@ -79,7 +79,7 @@ See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for module boundaries and des
 | `guardian/` | The project itself: `core.py` rules engine, `demo/` CLI, `dashboard/` Streamlit demo, `luna/` API, and the `mindmend_guardian.py` voice runtime sketch |
 | `tests/` | pytest suite run by CI |
 | `docs/` | Architecture, API, security configuration, privacy, threat model, status, roadmap, and screenshots |
-| `tools/` | Helper scripts |
+| `tools/` | `test_tts.py`, a standalone script that prints sample alert phrases and speaks them if `pyttsx3` is installed |
 | `ani-2027/` | Separate early prototype: a Tauri v2 + React desktop app for local Ollama chat (its own [README](ani-2027/README.md)). Not part of the Guardian safety layer, not covered by this repo's CI, and not yet build-verified per its README |
 | `perrien-simulator/` | Early Streamlit/Dash stub that plots an uploaded CSV. Not part of the safety layer; its "Use GPU" checkbox only changes a label, and `app_dash.py` is an unfinished skeleton |
 | `models/` | Empty placeholder (`.gitkeep` only); no model files are committed |
