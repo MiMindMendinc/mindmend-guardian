@@ -12,5 +12,5 @@ Welcome to the onboarding guide! Here you will find resources and information to
 7. **Create a pull request** to the main repository
 
 ## Resources
-- [CONTRIBUTING.md](CONTRIBUTING.md)
-- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [CONTRIBUTING.md](../CONTRIBUTING.md)
+- [Code of Conduct](../CODE_OF_CONDUCT.md)
